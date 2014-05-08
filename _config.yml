@@ -3,11 +3,11 @@
 # ----------------------- #
 
 url: http://gaoliying.github.io
-title: Gao Liying's Blog
-subtitle: A blogging framework for hackers.
-author: gly
+title: 高立营的博客
+subtitle: 燥起来吧！
+author: 高立营
 simple_search: https://www.google.com/search
-description:
+description: 高立营的技术博客
 
 # Default date format is "ordinal" (resulting in "July 22nd 2007")
 # You can customize the format as defined in
