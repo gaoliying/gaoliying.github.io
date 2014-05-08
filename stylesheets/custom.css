@@ -1,6 +1,7 @@
 body{
-	background-image: url(/images/beijing.jpg);
-	background-repeat: repeat; 
+	//background-image: url(/images/beijing.jpg);
+	//background-repeat: repeat; 
+	background: gray;
 }
 
 h1, h2, h3, h4, h5, h6{
