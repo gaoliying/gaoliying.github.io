@@ -1674,25 +1674,25 @@ aside.sidebar:hover a:hover {
 }
 body>footer {
 	font-size:.8em;
-	color:#888;
-	text-shadow:#d9d9d9 0 1px;
+	color:#fff;
+	/*text-shadow:#d9d9d9 0 1px;*/
 	background-color:#0A8091;
-	background:url('/images/noise.png?1399513803'),-webkit-gradient(linear,50% 0%,50% 100%,color-stop(0%,#e0e0e0),color-stop(50%,#cccccc),color-stop(100%,#b0b0b0));
+	/*background:url('/images/noise.png?1399513803'),-webkit-gradient(linear,50% 0%,50% 100%,color-stop(0%,#e0e0e0),color-stop(50%,#cccccc),color-stop(100%,#b0b0b0));
 	background:url('/images/noise.png?1399513803'),-webkit-linear-gradient(#e0e0e0,#cccccc,#b0b0b0);
 	background:url('/images/noise.png?1399513803'),-moz-linear-gradient(#e0e0e0,#cccccc,#b0b0b0);
 	background:url('/images/noise.png?1399513803'),-o-linear-gradient(#e0e0e0,#cccccc,#b0b0b0);
-	background:url('/images/noise.png?1399513803'),linear-gradient(#e0e0e0,#cccccc,#b0b0b0);
+	background:url('/images/noise.png?1399513803'),linear-gradient(#e0e0e0,#cccccc,#b0b0b0);*/
 	border-top:1px solid #f2f2f2;
 	position:relative;
 	padding-top:1em;
 	padding-bottom:1em;
 	margin-bottom:3em;
-	-moz-border-radius-bottomleft:0.4em;
+	/*-moz-border-radius-bottomleft:0.4em;
 	-webkit-border-bottom-left-radius:0.4em;
 	border-bottom-left-radius:0.4em;
 	-moz-border-radius-bottomright:0.4em;
 	-webkit-border-bottom-right-radius:0.4em;
-	border-bottom-right-radius:0.4em;
+	border-bottom-right-radius:0.4em;*/
 	z-index:1
 }
 body>footer a {
