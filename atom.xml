@@ -4,7 +4,7 @@
   <title><![CDATA[Gao Liying's Blog]]></title>
   <link href="http://gaoliying.github.io/atom.xml" rel="self"/>
   <link href="http://gaoliying.github.io/"/>
-  <updated>2014-05-08T11:13:36+08:00</updated>
+  <updated>2014-05-08T16:19:55+08:00</updated>
   <id>http://gaoliying.github.io/</id>
   <author>
     <name><![CDATA[gly]]></name>
@@ -21,6 +21,16 @@
     <content type="html"><![CDATA[<p>hello world ！！！</p>
 
 <p><em>这是我的第一篇测试文章，求给力。</em></p>
+
+<table>
+<thead>
+<tr>
+<th>heihie</th>
+<th>hahah</th>
+</tr>
+</thead>
+</table>
+
 ]]></content>
   </entry>
   
