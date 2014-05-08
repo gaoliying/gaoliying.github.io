@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Gao Liying's Blog]]></title>
+  <title><![CDATA[高立营的博客]]></title>
   <link href="http://gaoliying.github.io/atom.xml" rel="self"/>
   <link href="http://gaoliying.github.io/"/>
-  <updated>2014-05-08T17:46:43+08:00</updated>
+  <updated>2014-05-08T18:23:05+08:00</updated>
   <id>http://gaoliying.github.io/</id>
   <author>
-    <name><![CDATA[gly]]></name>
+    <name><![CDATA[高立营]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
