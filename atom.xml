@@ -4,7 +4,7 @@
   <title><![CDATA[Gao Liying's Blog]]></title>
   <link href="http://gaoliying.github.io/atom.xml" rel="self"/>
   <link href="http://gaoliying.github.io/"/>
-  <updated>2014-05-08T17:34:17+08:00</updated>
+  <updated>2014-05-08T17:37:07+08:00</updated>
   <id>http://gaoliying.github.io/</id>
   <author>
     <name><![CDATA[gly]]></name>
@@ -26,19 +26,13 @@
 
 <p>jekyll和octopress的学习过程颇费周折，最终依靠官方文档和搜索引擎，问题都一一解决了。以下是官方文档：</p>
 
-<ul>
-<li><a href="http://jekyllrb.com/docs/home/" title="jekyll">jekyll</a></li>
-<li><a href="http://octopress.org/" title="octopress">octopress</a></li>
-</ul>
-
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<em> <a href="http://jekyllrb.com/docs/home/" title="jekyll">jekyll</a>
+&nbsp;&nbsp;&nbsp;&nbsp;</em> <a href="http://octopress.org/" title="octopress">octopress</a></p>
 
 <p>现在我感觉我最迫切的任务是赶紧熟悉octopress框架和掌握markdown标记语言。octopress的默认主题我觉得不够优雅，之后我会下载一些主题，或许条件允许的话我会自己customize。markdown语言比较简单，附上学习地址：</p>
 
-<ul>
-<li><a href="http://wowubuntu.com/markdown/">markdown语法说明</a></li>
-<li><a href="http://jianshu.io/p/q81RER">献给写作者的markdown新手指南</a></li>
-</ul>
-
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<em> <a href="http://wowubuntu.com/markdown/">markdown语法说明</a>
+&nbsp;&nbsp;&nbsp;&nbsp;</em> <a href="http://jianshu.io/p/q81RER">献给写作者的markdown新手指南</a></p>
 
 <p>今天晚些时候我打算翻译一篇技术文章，Let&rsquo;s move!!!</p>
 ]]></content>
