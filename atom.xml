@@ -4,7 +4,7 @@
   <title><![CDATA[Gao Liying's Blog]]></title>
   <link href="http://gaoliying.github.io/atom.xml" rel="self"/>
   <link href="http://gaoliying.github.io/"/>
-  <updated>2014-05-08T11:11:08+08:00</updated>
+  <updated>2014-05-08T11:13:36+08:00</updated>
   <id>http://gaoliying.github.io/</id>
   <author>
     <name><![CDATA[gly]]></name>
@@ -18,8 +18,9 @@
     <link href="http://gaoliying.github.io/blog/2014/05/08/first-acticle-in-octopress/"/>
     <updated>2014-05-08T09:57:37+08:00</updated>
     <id>http://gaoliying.github.io/blog/2014/05/08/first-acticle-in-octopress</id>
-    <content type="html"><![CDATA[<p>hello world ！！！
-这是我的第一篇测试文章，求给力。</p>
+    <content type="html"><![CDATA[<p>hello world ！！！</p>
+
+<p><em>这是我的第一篇测试文章，求给力。</em></p>
 ]]></content>
   </entry>
   
