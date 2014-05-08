@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: http://gaoliying.github.io/sitemap.xml 

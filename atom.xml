@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Gao Liying's Blog]]></title>
+  <link href="http://gaoliying.github.io/atom.xml" rel="self"/>
+  <link href="http://gaoliying.github.io/"/>
+  <updated>2014-05-08T10:09:39+08:00</updated>
+  <id>http://gaoliying.github.io/</id>
+  <author>
+    <name><![CDATA[gly]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[First Acticle in Octopress]]></title>
+    <link href="http://gaoliying.github.io/blog/2014/05/08/first-acticle-in-octopress/"/>
+    <updated>2014-05-08T09:57:37+08:00</updated>
+    <id>http://gaoliying.github.io/blog/2014/05/08/first-acticle-in-octopress</id>
+    <content type="html"><![CDATA[<p>hello world
+this is my first acticle in octopress
+现在我试一下能不能显示中文
+hahaah</p>
+]]></content>
+  </entry>
+  
+</feed>
