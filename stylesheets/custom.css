@@ -23,12 +23,12 @@ ul.main-navigation li{
 }
 
 ul.main-navigation li a{
-	color: white;
+	color: #3A99B1;
 	text-decoration: none;
-	-webkit-transition: color 0.4s ease-in;
-	-moz-transition: color 0.4s ease-in;
-	-0-transition: color 0.4s ease-in;
-	transition: color 0.4s ease-in;
+	-webkit-transition: color 0.2s ease-in;
+	-moz-transition: color 0.2s ease-in;
+	-0-transition: color 0.2s ease-in;
+	transition: color 0.2s ease-in;
 }
 
 ul.main-navigation li a:hover{
