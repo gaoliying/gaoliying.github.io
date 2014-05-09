@@ -4,7 +4,7 @@
   <title><![CDATA[高立营的博客]]></title>
   <link href="http://gaoliying.github.io/atom.xml" rel="self"/>
   <link href="http://gaoliying.github.io/"/>
-  <updated>2014-05-08T21:41:12+08:00</updated>
+  <updated>2014-05-09T10:25:58+08:00</updated>
   <id>http://gaoliying.github.io/</id>
   <author>
     <name><![CDATA[高立营]]></name>
@@ -23,6 +23,9 @@
 <h3>我的第一个个人博客</h3>
 
 <p>蛮久之前，我就想搭建一个自己的技术博客，由于当时水平有限，所以这个想法就搁浅了。到目前为止，我已经基本掌握了前端的知识，是时候实现当初那个想法了。对于我这种对后台开发还不是很了解的情况下，Github Pages无疑是最优选择。之后我就开始学习jekyll以及octopress框架。到现在，我终于在本地和github上搭建好了octopress环境，也知道怎么部署了，很兴奋。</p>
+
+<!--more-->
+
 
 <p>jekyll和octopress的学习过程颇费周折，最终依靠官方文档和搜索引擎，问题都一一解决了。以下是官方文档：</p>
 
