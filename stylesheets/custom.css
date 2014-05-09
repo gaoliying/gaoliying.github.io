@@ -25,10 +25,10 @@ ul.main-navigation li{
 ul.main-navigation li a{
 	color: #3A99B1;
 	text-decoration: none;
-	-webkit-transition: color 0.2s ease-in;
-	-moz-transition: color 0.2s ease-in;
-	-0-transition: color 0.2s ease-in;
-	transition: color 0.2s ease-in;
+	-webkit-transition: color 0.2s ;
+	-moz-transition: color 0.2s ;
+	-0-transition: color 0.2s ;
+	transition: color 0.2s ;
 }
 
 ul.main-navigation li a:hover{
