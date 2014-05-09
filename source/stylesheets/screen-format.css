@@ -396,10 +396,40 @@ body.sidebar-footer aside.sidebar.thirds section.first {
 body.sidebar-footer .toggle-sidebar {
 	display:none
 }
+
+@@media only screen and (min-width:100px){
+
+/** custom **/
+
+ul.main-navigation{
+	position: absolute;
+	top: 30px;
+	left: 160px;
+	font-size: 16px;
+	display: inline-block;
+}
+
+/** custom **/
+
+}
+
 @media only screen and (min-width:550px) {
 	body>header {
 	font-size:1em
 }
+
+/** custom **/
+
+ul.main-navigation{
+	position: absolute;
+	top: 30px;
+	left: 160px;
+	font-size: 16px;
+	display: inline-block;
+}
+
+/** custom **/
+
 }@media only screen and (min-width:750px) {
 	aside.sidebar {
 	float:none;
@@ -410,6 +440,19 @@ body.sidebar-footer .toggle-sidebar {
 	background-color:#f7f7f7;
 	border-top:1px solid #eaeaea
 }
+
+/** custom **/
+
+ul.main-navigation{
+	position: absolute;
+	top: 30px;
+	left: 160px;
+	font-size: 16px;
+	display: inline-block;
+}
+
+/** custom **/
+
 aside.sidebar section.odd,aside.sidebar section.even {
 	float:left;
 	width:48%
@@ -432,6 +475,19 @@ aside.sidebar.thirds section.first {
 	body {
 	-webkit-text-size-adjust:auto
 }
+
+/** custom **/
+
+ul.main-navigation{
+	position: absolute;
+	top: 40px;
+	left: 185px;
+	font-size: 20px;
+	display: inline-block;
+}
+
+/** custom **/
+
 body>header {
 	font-size:1.2em
 }
@@ -504,6 +560,19 @@ aside.sidebar section.odd,aside.sidebar section.even {
 	body>header {
 	font-size:1.3em
 }
+
+/** custom **/
+
+ul.main-navigation{
+	position: absolute;
+	top: 60px;
+	left: 215px;
+	font-size: 20px;
+	display: inline-block;
+}
+
+/** custom **/
+
 #content {
 	margin-right:300px
 }

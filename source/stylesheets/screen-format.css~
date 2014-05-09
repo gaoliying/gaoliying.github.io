@@ -396,10 +396,40 @@ body.sidebar-footer aside.sidebar.thirds section.first {
 body.sidebar-footer .toggle-sidebar {
 	display:none
 }
+
+@@media only screen and (max-width:549px){
+
+/** custom **/
+
+ul.main-navigation{
+	position: absolute;
+	top: 30px;
+	left: 160px;
+	font-size: 16px;
+	display: inline-block;
+}
+
+/** custom **/
+
+}
+
 @media only screen and (min-width:550px) {
 	body>header {
 	font-size:1em
 }
+
+/** custom **/
+
+ul.main-navigation{
+	position: absolute;
+	top: 30px;
+	left: 160px;
+	font-size: 16px;
+	display: inline-block;
+}
+
+/** custom **/
+
 }@media only screen and (min-width:750px) {
 	aside.sidebar {
 	float:none;
@@ -410,6 +440,19 @@ body.sidebar-footer .toggle-sidebar {
 	background-color:#f7f7f7;
 	border-top:1px solid #eaeaea
 }
+
+/** custom **/
+
+ul.main-navigation{
+	position: absolute;
+	top: 30px;
+	left: 160px;
+	font-size: 16px;
+	display: inline-block;
+}
+
+/** custom **/
+
 aside.sidebar section.odd,aside.sidebar section.even {
 	float:left;
 	width:48%
@@ -432,6 +475,19 @@ aside.sidebar.thirds section.first {
 	body {
 	-webkit-text-size-adjust:auto
 }
+
+/** custom **/
+
+ul.main-navigation{
+	position: absolute;
+	top: 40px;
+	left: 185px;
+	font-size: 20px;
+	display: inline-block;
+}
+
+/** custom **/
+
 body>header {
 	font-size:1.2em
 }
@@ -504,6 +560,19 @@ aside.sidebar section.odd,aside.sidebar section.even {
 	body>header {
 	font-size:1.3em
 }
+
+/** custom **/
+
+ul.main-navigation{
+	position: absolute;
+	top: 60px;
+	left: 215px;
+	font-size: 20px;
+	display: inline-block;
+}
+
+/** custom **/
+
 #content {
 	margin-right:300px
 }
@@ -524,14 +593,15 @@ aside.sidebar {
 	margin-left:0
 }
 }body>header {
-	background:#222
+	/*background:#222*/
 }
 body>header h1 {
 	display:inline-block;
 	margin:0
 }
 body>header h1 a,body>header h1 a:visited,body>header h1 a:hover {
-	color:#f2f2f2;
+	color:#3A99B1;
+	font-size: 45px;
 	text-decoration:none
 }
 body>header h2 {
@@ -1687,12 +1757,12 @@ body>footer {
 	padding-top:1em;
 	padding-bottom:1em;
 	margin-bottom:3em;
-	/*-moz-border-radius-bottomleft:0.4em;
+	-moz-border-radius-bottomleft:0.4em;
 	-webkit-border-bottom-left-radius:0.4em;
 	border-bottom-left-radius:0.4em;
 	-moz-border-radius-bottomright:0.4em;
 	-webkit-border-bottom-right-radius:0.4em;
-	border-bottom-right-radius:0.4em;*/
+	border-bottom-right-radius:0.4em;
 	z-index:1
 }
 body>footer a {

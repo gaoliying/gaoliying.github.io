@@ -1,5 +1,48 @@
 html{
-	background-image: url(/images/beijing3.jpg);
+	background-image: url(/images/beijing.png);
 	background-repeat: repeat; 
+}
+
+fieldset.mobile-nav{
+	display: none;
+}
+
+ul.main-navigation{
+	position: absolute;
+	top: 60px;
+	left: 215px;
+	font-size: 20px;
+	display: inline-block;
+}
+
+ul.main-navigation li{
+	float: left;
+	line-height: 40px;
+	padding: 0px 10px 0px 10px;
+	list-style: none;
+}
+
+ul.main-navigation li a{
+	color: #3A99B1;
+	text-decoration: none;
+	-webkit-transition: color 0.2s ;
+	-moz-transition: color 0.2s ;
+	-0-transition: color 0.2s ;
+	transition: color 0.2s ;
+}
+
+ul.main-navigation li a:hover{
+	color:#8AA6AD;
+}
+
+@font-face {
+  font-family: 'lixia';
+  src: url('/fonts/lixia.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body>header h1 a{
+	font-family: lixia;
 }
 
