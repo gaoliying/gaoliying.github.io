@@ -7,14 +7,6 @@ fieldset.mobile-nav{
 	display: none;
 }
 
-hgroup.site-title{
-	display: inline-block;
-}
-
-nav[role="navigation"]{
-	float: left;
-}
-
 ul.main-navigation{
 	position: absolute;
 	top: 60px;
