@@ -3,3 +3,20 @@ html{
 	background-repeat: repeat; 
 }
 
+fieldset.mobile-nav{
+	display: none;
+}
+
+ul.main-navigation{
+	position: absolute;
+	top: 50px;
+	left:150px;
+	display: inline-block;
+}
+
+ul.main-navigation li{
+	float: left;
+	line-height: 40px;
+	padding: 0px 10px 0px 10px;
+}
+
