@@ -531,7 +531,8 @@ body>header h1 {
 	margin:0
 }
 body>header h1 a,body>header h1 a:visited,body>header h1 a:hover {
-	color:#3A99B1;
+	color:#fff;
+	font-size: 45px;
 	text-decoration:none
 }
 body>header h2 {
