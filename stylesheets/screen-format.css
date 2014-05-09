@@ -102,7 +102,7 @@ body>header h2 {
 }
 body {
 	line-height:1.5em;
-	color:#ddd
+	color:#eee;
 }
 h1 {
 	font-size:2.2em;
@@ -338,7 +338,7 @@ aside.sidebar {
 	float:none;
 	padding:0 18px 1px;
 	background-color:#f7f7f7;
-	border-top:1px solid #e0e0e0
+	/*border-top:1px solid #e0e0e0 modified by gly @2014.5.8*/
 }
 .flex-content,article img,article video,article .flash-video,aside.sidebar img {
 	max-width:100%;
