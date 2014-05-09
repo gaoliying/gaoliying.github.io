@@ -75,7 +75,7 @@ body>div {
 	/*border-bottom:1px solid #bfbfbf;  modified by gly @2014.5.9  */
 }
 body>div>div {
-	background:#f8f8f8 url('/images/noise.png?1399513803') top left;
+	/*background:#f8f8f8 url('/images/noise.png?1399513803') top left; modified by gly @2014.5.9*/
 	border-right:1px solid #7E7E7E
 }
 .heading,body>header h1,h1,h2,h3,h4,h5,h6 {
@@ -102,7 +102,7 @@ body>header h2 {
 }
 body {
 	line-height:1.5em;
-	color:#222
+	color:#ddd
 }
 h1 {
 	font-size:2.2em;
