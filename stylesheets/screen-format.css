@@ -1587,7 +1587,7 @@ aside.sidebar section {
 aside.sidebar section h1 {
 	margin:1.5em 0 0;
 	padding-bottom:.2em;
-	border-bottom:1px solid #e0e0e0
+	/*border-bottom:1px solid #e0e0e0*/
 }
 aside.sidebar section h1+p {
 	padding-top:.4em

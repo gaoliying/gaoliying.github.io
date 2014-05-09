@@ -50,3 +50,8 @@ body>header h1 a{
 	font-family: lixia;
 }
 
+aside.sidebar section ul li a::before{
+	content:"*";
+	color: #eee;
+}
+
