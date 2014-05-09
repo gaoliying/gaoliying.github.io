@@ -44,7 +44,7 @@ a:focus {
 	color:#0181eb
 }
 a:hover {
-	color:#0181eb
+	color:#3A99B1
 }
 a:active {
 	color:#01579f
@@ -56,7 +56,7 @@ aside.sidebar a:focus {
 	color:#0181eb
 }
 aside.sidebar a:hover {
-	color:#0181eb
+	color:#3A99B1
 }
 aside.sidebar a:active {
 	color:#01579f
@@ -983,7 +983,7 @@ article>footer p.meta {
 	color:inherit
 }
 #content .blog-index article h1 a:hover {
-	color:#0181eb
+	color:#3A99B1
 }
 #content .blog-index a[rel=full-article] {
 	background:#ebebeb;
@@ -1032,7 +1032,7 @@ article>footer p.meta {
 	right:0
 }
 #content div.pagination a:hover {
-	color:#0181eb
+	color:#3A99B1
 }
 #content div.pagination a[href*=archive]:before,#content div.pagination a[href*=archive]:after {
 	content:'\2014';
@@ -1501,7 +1501,7 @@ figure.code .highlight {
 	text-decoration:underline
 }
 #blog-archives h1 a:hover {
-	color:#0181eb
+	color:#3A99B1
 }
 #blog-archives a.category,#blog-archives time {
 	color:#aaa
@@ -1526,10 +1526,10 @@ figure.code .highlight {
 	color:inherit
 }
 #blog-archives a:hover,#blog-archives .entry-content a:hover {
-	color:#0181eb
+	color:#3A99B1
 }
 #blog-archives a:hover {
-	color:#0181eb
+	color:#3A99B1
 }
 @media only screen and (min-width:550px) {
 	#blog-archives article {
@@ -1630,7 +1630,7 @@ aside.sidebar:hover a {
 	color:#222
 }
 aside.sidebar:hover a:hover {
-	color:#0181eb
+	color:#3A99B1
 }
 .aside-alt-link,#pinboard_linkroll .pin-tag {
 	color:#7e7e7e
