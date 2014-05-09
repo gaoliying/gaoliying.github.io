@@ -410,6 +410,19 @@ body.sidebar-footer .toggle-sidebar {
 	background-color:#f7f7f7;
 	border-top:1px solid #eaeaea
 }
+
+/** custom **/
+
+ul.main-navigation{
+	position: absolute;
+	top: 40px;
+	left: 185px;
+	font-size: 20px;
+	display: inline-block;
+}
+
+/** custom **/
+
 aside.sidebar section.odd,aside.sidebar section.even {
 	float:left;
 	width:48%
