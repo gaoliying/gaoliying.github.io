@@ -10,7 +10,8 @@ fieldset.mobile-nav{
 ul.main-navigation{
 	position: absolute;
 	top: 60px;
-	left:200px;
+	left:230px;
+	font-size: 20px;
 	display: inline-block;
 }
 
@@ -24,5 +25,13 @@ ul.main-navigation li{
 ul.main-navigation li a{
 	color: white;
 	text-decoration: none;
+	-webkit-transition: color 0.7s ease-in;
+	-moz-transition: color 0.7s ease-in;
+	-0-transition: color 0.7s ease-in;
+	transition: color 0.7s ease-in;
+}
+
+ul.main-navigation li a:hover{
+	color:#3A99B1;
 }
 
