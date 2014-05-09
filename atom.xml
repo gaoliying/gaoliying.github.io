@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[高立营的博客]]></title>
+  <title><![CDATA[高立营]]></title>
   <link href="http://gaoliying.github.io/atom.xml" rel="self"/>
   <link href="http://gaoliying.github.io/"/>
-  <updated>2014-05-09T11:04:16+08:00</updated>
+  <updated>2014-05-09T11:11:13+08:00</updated>
   <id>http://gaoliying.github.io/</id>
   <author>
     <name><![CDATA[高立营]]></name>
