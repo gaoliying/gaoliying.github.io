@@ -4,6 +4,9 @@ title: "我的第一篇markdown文章"
 date: 2014-05-08 09:57:37 +0800
 comments: true
 categories: 随笔
+tags: ["jekyll", "octopress", "markdown"]
+description: jekyll,octopress,markdown
+keywords: jekyll,octopress,markdown
 ---
 
 *这是我的第一篇测试文章，求给力。*
@@ -11,6 +14,8 @@ categories: 随笔
 ### 我的第一个个人博客
 
 蛮久之前，我就想搭建一个自己的技术博客，由于当时水平有限，所以这个想法就搁浅了。到目前为止，我已经基本掌握了前端的知识，是时候实现当初那个想法了。对于我这种对后台开发还不是很了解的情况下，Github Pages无疑是最优选择。之后我就开始学习jekyll以及octopress框架。到现在，我终于在本地和github上搭建好了octopress环境，也知道怎么部署了，很兴奋。
+
+<!--more-->
 
 jekyll和octopress的学习过程颇费周折，最终依靠官方文档和搜索引擎，问题都一一解决了。以下是官方文档：
 
@@ -23,3 +28,4 @@ jekyll和octopress的学习过程颇费周折，最终依靠官方文档和搜�
 &nbsp;&nbsp;&nbsp;&nbsp;* [献给写作者的markdown新手指南](http://jianshu.io/p/q81RER)
 
 今天晚些时候我打算翻译一篇技术文章，Let's move!!!
+
