@@ -71,12 +71,12 @@ a {
 	//background:#252525 url('/images/line-tile.png?1399513803') top left
 }*/
 body>div {
-	background:#f2f2f2 url('/images/noise.png?1399513803') top left;
-	border-bottom:1px solid #bfbfbf
+	background:rgba(100,100,100,0.6) url('/images/noise.png?1399513803') top left;
+	/*border-bottom:1px solid #bfbfbf;  modified by gly @2014.5.9  */
 }
 body>div>div {
 	background:#f8f8f8 url('/images/noise.png?1399513803') top left;
-	border-right:1px solid #e0e0e0
+	border-right:1px solid #7E7E7E
 }
 .heading,body>header h1,h1,h2,h3,h4,h5,h6 {
 	font-family:"PT Serif","Georgia","Helvetica Neue",Arial,sans-serif
@@ -438,7 +438,7 @@ ul.main-navigation{
 	margin:0;
 	padding:0 35px 1px;
 	background-color:#f7f7f7;
-	border-top:1px solid #eaeaea
+	/*border-top:1px solid #eaeaea; modified by gly@2014.5.9*/
 }
 
 /** custom **/
