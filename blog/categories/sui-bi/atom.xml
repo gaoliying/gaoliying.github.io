@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 随笔 | 高立营的博客]]></title>
   <link href="http://gaoliying.github.io/blog/categories/sui-bi/atom.xml" rel="self"/>
   <link href="http://gaoliying.github.io/"/>
-  <updated>2014-05-09T10:58:57+08:00</updated>
+  <updated>2014-05-09T11:04:16+08:00</updated>
   <id>http://gaoliying.github.io/</id>
   <author>
     <name><![CDATA[高立营]]></name>
@@ -38,16 +38,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;</em> <a href="http://jianshu.io/p/q81RER">献给写作者的markdown新手指南</a></p>
 
 <p>今天晚些时候我打算翻译一篇技术文章，Let&rsquo;s move!!!</p>
-
-<div>
-<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>a brief look at codeblock </span></figcaption>
-<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="kd">var</span> <span class="nx">arr1</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Array</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
-</span><span class='line'><span class="kd">var</span> <span class="nx">arr2</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Array</span><span class="p">(</span><span class="nx">element0</span><span class="p">,</span> <span class="nx">element1</span><span class="p">,</span> <span class="nx">elementN</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
-</div>
-
 ]]></content>
   </entry>
   
