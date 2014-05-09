@@ -415,9 +415,9 @@ body.sidebar-footer .toggle-sidebar {
 
 ul.main-navigation{
 	position: absolute;
-	top: 40px;
-	left: 185px;
-	font-size: 20px;
+	top: 30px;
+	left: 160px;
+	font-size: 16px;
 	display: inline-block;
 }
 
