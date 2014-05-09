@@ -337,7 +337,7 @@ body>header,body>nav,body>footer,body #content>article,body #content>div>article
 aside.sidebar {
 	float:none;
 	padding:0 18px 1px;
-	background-color:#f7f7f7;
+	/*background-color:#f7f7f7; modified by gly @2014.5.9*/
 	/*border-top:1px solid #e0e0e0 modified by gly @2014.5.8*/
 }
 .flex-content,article img,article video,article .flash-video,aside.sidebar img {
@@ -1569,20 +1569,20 @@ figure.code .highlight {
 #content>.category .year {
 	display:inline
 }
-.side-shadow-border,aside.sidebar section h1,aside.sidebar li {
+/*.side-shadow-border,aside.sidebar section h1,aside.sidebar li {
 	-webkit-box-shadow:#fff 0 1px;
 	-moz-box-shadow:#fff 0 1px;
 	box-shadow:#fff 0 1px
-}
+}*/
 aside.sidebar {
 	overflow:hidden;
-	color:#4b4b4b;
-	text-shadow:#fff 0 1px
+	color:#eee;
+	/*text-shadow:#fff 0 1px modified by gly  @2014.5.9*/
 }
 aside.sidebar section {
 	font-size:.8em;
 	line-height:1.4em;
-	margin-bottom:1.5em
+	/*margin-bottom:1.5em*/
 }
 aside.sidebar section h1 {
 	margin:1.5em 0 0;
@@ -1614,7 +1614,7 @@ aside.sidebar li {
 	list-style:none;
 	padding:.5em 0;
 	margin:0;
-	border-bottom:1px solid #e0e0e0
+	/*border-bottom:1px solid #e0e0e0*/
 }
 aside.sidebar li p:last-child {
 	margin-bottom:0
