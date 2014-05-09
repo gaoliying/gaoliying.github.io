@@ -9,8 +9,8 @@ fieldset.mobile-nav{
 
 ul.main-navigation{
 	position: absolute;
-	top: 50px;
-	left:150px;
+	top: 60px;
+	left:200px;
 	display: inline-block;
 }
 
@@ -18,5 +18,11 @@ ul.main-navigation li{
 	float: left;
 	line-height: 40px;
 	padding: 0px 10px 0px 10px;
+	list-style: none;
+}
+
+ul.main-navigation li a{
+	color: white;
+	text-decoration: none;
 }
 
