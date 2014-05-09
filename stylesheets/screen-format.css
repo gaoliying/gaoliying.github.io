@@ -38,7 +38,7 @@ a {
 	color:#1863a1
 }
 a:visited {
-	color:#3A99B1
+	/*color:#3A99B1*/
 }
 a:focus {
 	color:#0181eb
@@ -600,7 +600,7 @@ body>header h1 {
 	margin:0
 }
 body>header h1 a,body>header h1 a:visited,body>header h1 a:hover {
-	color:#3A99B1;
+	/*color:#3A99B1;*/
 	font-size: 45px;
 	text-decoration:none
 }
@@ -730,7 +730,7 @@ body>nav a {
 	line-height:1.5em
 }
 body>nav a:visited {
-	color:#3A99B1
+	/*color:#3A99B1*/
 }
 body>nav a:hover {
 	color:#2b2b2b
@@ -1769,7 +1769,7 @@ body>footer a {
 	color:#5BD0F5
 }
 body>footer a:visited {
-	color:#3A99B1
+	/*color:#3A99B1*/
 }
 body>footer a:hover {
 	color:#3A99B1
