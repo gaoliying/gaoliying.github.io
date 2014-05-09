@@ -432,6 +432,19 @@ aside.sidebar.thirds section.first {
 	body {
 	-webkit-text-size-adjust:auto
 }
+
+/** custom **/
+
+ul.main-navigation{
+	position: absolute;
+	top: 40px;
+	left: 185px;
+	font-size: 20px;
+	display: inline-block;
+}
+
+/** custom **/
+
 body>header {
 	font-size:1.2em
 }
