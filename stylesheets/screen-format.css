@@ -396,6 +396,23 @@ body.sidebar-footer aside.sidebar.thirds section.first {
 body.sidebar-footer .toggle-sidebar {
 	display:none
 }
+
+@@media only screen and (max-width:549px){
+
+/** custom **/
+
+ul.main-navigation{
+	position: absolute;
+	top: 30px;
+	left: 160px;
+	font-size: 16px;
+	display: inline-block;
+}
+
+/** custom **/
+
+}
+
 @media only screen and (min-width:550px) {
 	body>header {
 	font-size:1em
