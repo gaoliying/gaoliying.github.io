@@ -15,6 +15,10 @@ fieldset.mobile-nav{
 	display: inline-block;
 }*/
 
+footer[role="contentinfo"] p{
+	text-align: center;
+}
+
 ul.main-navigation li{
 	float: left;
 	line-height: 40px;
@@ -45,4 +49,17 @@ ul.main-navigation li a:hover{
 body>header h1 a{
 	font-family: lixia;
 }
+
+aside.sidebar section ul li::before{
+	content:"* ";
+	color: #eee;
+}
+
+a.comment{
+ color:#aaa;
+}
+
+
+
+
 

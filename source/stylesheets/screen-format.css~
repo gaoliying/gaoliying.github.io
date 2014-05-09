@@ -35,16 +35,16 @@ article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section,su
 	display:block
 }
 a {
-	color:#1863a1
+	color:#3A99B1
 }
 a:visited {
-	color:#751590
+	/*color:#3A99B1*/
 }
 a:focus {
 	color:#0181eb
 }
 a:hover {
-	color:#0181eb
+	color:#3A99B1
 }
 a:active {
 	color:#01579f
@@ -56,7 +56,7 @@ aside.sidebar a:focus {
 	color:#0181eb
 }
 aside.sidebar a:hover {
-	color:#0181eb
+	color:#3A99B1
 }
 aside.sidebar a:active {
 	color:#01579f
@@ -71,12 +71,12 @@ a {
 	//background:#252525 url('/images/line-tile.png?1399513803') top left
 }*/
 body>div {
-	background:#f2f2f2 url('/images/noise.png?1399513803') top left;
-	border-bottom:1px solid #bfbfbf
+	background:rgba(100,100,100,0.6) url('/images/noise.png?1399513803') top left;
+	/*border-bottom:1px solid #bfbfbf;  modified by gly @2014.5.9  */
 }
 body>div>div {
-	background:#f8f8f8 url('/images/noise.png?1399513803') top left;
-	border-right:1px solid #e0e0e0
+	/*background:#f8f8f8 url('/images/noise.png?1399513803') top left; modified by gly @2014.5.9*/
+	border-right:1px solid #7E7E7E
 }
 .heading,body>header h1,h1,h2,h3,h4,h5,h6 {
 	font-family:"PT Serif","Georgia","Helvetica Neue",Arial,sans-serif
@@ -102,7 +102,7 @@ body>header h2 {
 }
 body {
 	line-height:1.5em;
-	color:#222
+	color:#eee;
 }
 h1 {
 	font-size:2.2em;
@@ -337,8 +337,8 @@ body>header,body>nav,body>footer,body #content>article,body #content>div>article
 aside.sidebar {
 	float:none;
 	padding:0 18px 1px;
-	background-color:#f7f7f7;
-	border-top:1px solid #e0e0e0
+	/*background-color:#f7f7f7; modified by gly @2014.5.9*/
+	/*border-top:1px solid #e0e0e0 modified by gly @2014.5.8*/
 }
 .flex-content,article img,article video,article .flash-video,aside.sidebar img {
 	max-width:100%;
@@ -397,7 +397,7 @@ body.sidebar-footer .toggle-sidebar {
 	display:none
 }
 
-@@media only screen and (max-width:549px){
+@@media only screen and (min-width:100px){
 
 /** custom **/
 
@@ -438,7 +438,7 @@ ul.main-navigation{
 	margin:0;
 	padding:0 35px 1px;
 	background-color:#f7f7f7;
-	border-top:1px solid #eaeaea
+	/*border-top:1px solid #eaeaea; modified by gly@2014.5.9*/
 }
 
 /** custom **/
@@ -600,7 +600,7 @@ body>header h1 {
 	margin:0
 }
 body>header h1 a,body>header h1 a:visited,body>header h1 a:hover {
-	color:#3A99B1;
+	/*color:#3A99B1;*/
 	font-size: 45px;
 	text-decoration:none
 }
@@ -730,7 +730,7 @@ body>nav a {
 	line-height:1.5em
 }
 body>nav a:visited {
-	color:#6b6b6b
+	/*color:#3A99B1*/
 }
 body>nav a:hover {
 	color:#2b2b2b
@@ -884,8 +884,8 @@ article header p {
 }
 article header p.meta {
 	text-transform:uppercase;
-	position:absolute;
-	top:0
+	/*position:absolute;
+	top:0*/
 }
 @media only screen and (min-width:768px) {
 	article header {
@@ -983,7 +983,7 @@ article>footer p.meta {
 	color:inherit
 }
 #content .blog-index article h1 a:hover {
-	color:#0181eb
+	color:#3A99B1
 }
 #content .blog-index a[rel=full-article] {
 	background:#ebebeb;
@@ -1032,7 +1032,7 @@ article>footer p.meta {
 	right:0
 }
 #content div.pagination a:hover {
-	color:#0181eb
+	color:#3A99B1
 }
 #content div.pagination a[href*=archive]:before,#content div.pagination a[href*=archive]:after {
 	content:'\2014';
@@ -1482,7 +1482,7 @@ figure.code .highlight {
 	margin:0
 }
 #blog-archives h1 {
-	color:#222;
+	color:#eee;
 	margin-bottom:.3em
 }
 #blog-archives h2 {
@@ -1501,7 +1501,7 @@ figure.code .highlight {
 	text-decoration:underline
 }
 #blog-archives h1 a:hover {
-	color:#0181eb
+	color:#3A99B1
 }
 #blog-archives a.category,#blog-archives time {
 	color:#aaa
@@ -1526,10 +1526,10 @@ figure.code .highlight {
 	color:inherit
 }
 #blog-archives a:hover,#blog-archives .entry-content a:hover {
-	color:#0181eb
+	color:#3A99B1
 }
 #blog-archives a:hover {
-	color:#0181eb
+	color:#3A99B1
 }
 @media only screen and (min-width:550px) {
 	#blog-archives article {
@@ -1569,25 +1569,25 @@ figure.code .highlight {
 #content>.category .year {
 	display:inline
 }
-.side-shadow-border,aside.sidebar section h1,aside.sidebar li {
+/*.side-shadow-border,aside.sidebar section h1,aside.sidebar li {
 	-webkit-box-shadow:#fff 0 1px;
 	-moz-box-shadow:#fff 0 1px;
 	box-shadow:#fff 0 1px
-}
+}*/
 aside.sidebar {
 	overflow:hidden;
-	color:#4b4b4b;
-	text-shadow:#fff 0 1px
+	color:#eee;
+	/*text-shadow:#fff 0 1px modified by gly  @2014.5.9*/
 }
 aside.sidebar section {
 	font-size:.8em;
 	line-height:1.4em;
-	margin-bottom:1.5em
+	/*margin-bottom:1.5em*/
 }
 aside.sidebar section h1 {
 	margin:1.5em 0 0;
 	padding-bottom:.2em;
-	border-bottom:1px solid #e0e0e0
+	/*border-bottom:1px solid #e0e0e0*/
 }
 aside.sidebar section h1+p {
 	padding-top:.4em
@@ -1614,7 +1614,7 @@ aside.sidebar li {
 	list-style:none;
 	padding:.5em 0;
 	margin:0;
-	border-bottom:1px solid #e0e0e0
+	/*border-bottom:1px solid #e0e0e0*/
 }
 aside.sidebar li p:last-child {
 	margin-bottom:0
@@ -1630,7 +1630,7 @@ aside.sidebar:hover a {
 	color:#222
 }
 aside.sidebar:hover a:hover {
-	color:#0181eb
+	color:#3A99B1
 }
 .aside-alt-link,#pinboard_linkroll .pin-tag {
 	color:#7e7e7e
@@ -1744,8 +1744,8 @@ aside.sidebar:hover a:hover {
 }
 body>footer {
 	font-size:.8em;
-	color:#fff;
-	text-shadow:#d9d9d9 0 1px;
+	color:#3A99B1;
+	/*text-shadow:#d9d9d9 0 1px;
 	background-color:#cecece;
 	background:url('/images/noise.png?1399513803'),-webkit-gradient(linear,50% 0%,50% 100%,color-stop(0%,#e0e0e0),color-stop(50%,#cccccc),color-stop(100%,#b0b0b0));
 	background:url('/images/noise.png?1399513803'),-webkit-linear-gradient(#e0e0e0,#cccccc,#b0b0b0);
@@ -1753,26 +1753,26 @@ body>footer {
 	background:url('/images/noise.png?1399513803'),-o-linear-gradient(#e0e0e0,#cccccc,#b0b0b0);
 	background:url('/images/noise.png?1399513803'),linear-gradient(#e0e0e0,#cccccc,#b0b0b0);
 	border-top:1px solid #f2f2f2;
-	position:relative;
+	position:relative;*/
 	padding-top:1em;
 	padding-bottom:1em;
-	margin-bottom:3em;
+	/*margin-bottom:3em;
 	-moz-border-radius-bottomleft:0.4em;
 	-webkit-border-bottom-left-radius:0.4em;
 	border-bottom-left-radius:0.4em;
 	-moz-border-radius-bottomright:0.4em;
 	-webkit-border-bottom-right-radius:0.4em;
 	border-bottom-right-radius:0.4em;
-	z-index:1
+	z-index:1*/
 }
 body>footer a {
-	color:#6b6b6b
+	color:#5BD0F5
 }
 body>footer a:visited {
-	color:#6b6b6b
+	/*color:#3A99B1*/
 }
 body>footer a:hover {
-	color:#484848
+	color:#3A99B1
 }
 body>footer p:last-child {
 	margin-bottom:0
