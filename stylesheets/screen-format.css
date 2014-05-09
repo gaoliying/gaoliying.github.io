@@ -517,6 +517,19 @@ aside.sidebar section.odd,aside.sidebar section.even {
 	body>header {
 	font-size:1.3em
 }
+
+/** custom **/
+
+ul.main-navigation{
+	position: absolute;
+	top: 40px;
+	left: 185px;
+	font-size: 20px;
+	display: inline-block;
+}
+
+/** custom **/
+
 #content {
 	margin-right:300px
 }

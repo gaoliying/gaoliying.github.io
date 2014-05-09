@@ -7,13 +7,13 @@ fieldset.mobile-nav{
 	display: none;
 }
 
-ul.main-navigation{
+/*ul.main-navigation{
 	position: absolute;
 	top: 60px;
 	left: 215px;
 	font-size: 20px;
 	display: inline-block;
-}
+}*/
 
 ul.main-navigation li{
 	float: left;
