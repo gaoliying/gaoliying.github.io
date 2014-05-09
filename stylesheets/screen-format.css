@@ -884,8 +884,8 @@ article header p {
 }
 article header p.meta {
 	text-transform:uppercase;
-	position:absolute;
-	top:0
+	/*position:absolute;
+	top:0*/
 }
 @media only screen and (min-width:768px) {
 	article header {
@@ -1482,7 +1482,7 @@ figure.code .highlight {
 	margin:0
 }
 #blog-archives h1 {
-	color:#222;
+	color:#eee;
 	margin-bottom:.3em
 }
 #blog-archives h2 {
