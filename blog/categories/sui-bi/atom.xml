@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 随笔 | 高立营]]></title>
   <link href="http://gaoliying.github.io/blog/categories/sui-bi/atom.xml" rel="self"/>
   <link href="http://gaoliying.github.io/"/>
-  <updated>2014-05-10T10:53:16+08:00</updated>
+  <updated>2014-05-10T11:31:33+08:00</updated>
   <id>http://gaoliying.github.io/</id>
   <author>
     <name><![CDATA[高立营]]></name>
@@ -12,6 +12,27 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[博客样式初步确定]]></title>
+    <link href="http://gaoliying.github.io/blog/2014/05/10/the-entire-blog-is-almost-done/"/>
+    <updated>2014-05-10T10:56:23+08:00</updated>
+    <id>http://gaoliying.github.io/blog/2014/05/10/the-entire-blog-is-almost-done</id>
+    <content type="html"><![CDATA[<h3>告一段落</h3>
+
+<p>经过两天的设计和调试，博客的外观就变成大家现在看到的样子。外观主体给人的感觉是暗色调的，我看过太多其他人博客是白底黑字，这样虽然给人一种简约的感觉，但是比较单调。所以我决定给自己的博客融入黑色元素。</p>
+
+<!-- more -->
+
+
+<p>同时博客的超链接颜色是墨绿色的，而不是千篇一律的蓝色或黑色。背景图片是从网上下载来的灰黑相间的格子，链接稍后我会给出来。博客的logo(也就是我的名字那三个字)不再使用系统的中文字体，而是立夏手写体，这样子logo就不会给人一种刻板的感觉。下面是一些资源链接：</p>
+
+<p><a href="http://subtlepatterns.com/">网页背景素材</a>
+<a href="http://font.chinaz.com/">字体素材</a></p>
+
+<p>博客的主体内容包裹在一层灰色半透明的区域内。每篇博客后面还增加了社会化分享组件，可以使访客方便的分享感兴趣的内容到微薄，微信等平台。最后我还增加了多说评论组件，实现博客留言的功能，而我可以在多说提供的后台管理界面上管理评论内容，非常方便。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[我的第一篇markdown文章]]></title>
