@@ -5,8 +5,8 @@ date: 2014-05-08 09:57:37 +0800
 comments: true
 categories: 随笔
 tags: ["jekyll", "octopress", "markdown"]
-description: jekyll,octopress,markdown
-keywords: jekyll,octopress,markdown
+description: "jekyll,octopress,markdown"
+keywords: "jekyll,octopress,markdown"
 ---
 
 *这是我的第一篇测试文章，求给力。*
