@@ -4,7 +4,7 @@
   <title><![CDATA[Category: backend | 高立营]]></title>
   <link href="http://gaoliying.github.io/blog/categories/backend/atom.xml" rel="self"/>
   <link href="http://gaoliying.github.io/"/>
-  <updated>2014-05-19T10:50:22+08:00</updated>
+  <updated>2014-05-19T11:22:50+08:00</updated>
   <id>http://gaoliying.github.io/</id>
   <author>
     <name><![CDATA[高立营]]></name>
@@ -30,6 +30,9 @@
 
 
 <p>上述with语句会在嵌套的代码执行完后自动关闭文件。当with语句块中抛出异常时，在这个异常被外层处理器捕获之前，文件会被关闭。当嵌套的with语句中执行到return，continue，break等语句时，文件也会被关闭。</p>
+
+<!-- more -->
+
 
 <p>下面列举另一个例子。pycairo是python的图形库。其Context类提供save()方法，用来将当前的绘图状态压入栈中，以及一个restore()方法用来从栈顶恢复前一个绘图状态。这两个函数一般成对地调用。</p>
 
