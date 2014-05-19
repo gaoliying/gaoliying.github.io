@@ -4,7 +4,7 @@
   <title><![CDATA[高立营]]></title>
   <link href="http://gaoliying.github.io/atom.xml" rel="self"/>
   <link href="http://gaoliying.github.io/"/>
-  <updated>2014-05-19T21:18:31+08:00</updated>
+  <updated>2014-05-19T21:20:54+08:00</updated>
   <id>http://gaoliying.github.io/</id>
   <author>
     <name><![CDATA[高立营]]></name>
@@ -140,7 +140,7 @@
 </span><span class='line'>        <span class="k">def</span> <span class="nf">inner_wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>          <span class="c"># On wrapped function call</span>
 </span><span class='line'>            <span class="c"># Use var and args</span>
 </span><span class='line'>      <span class="c"># F(*args) calls original function</span>
-</span><span class='line'>  <span class="k">return</span> <span class="n">inner_wrapper</span>
+</span><span class='line'>        <span class="k">return</span> <span class="n">inner_wrapper</span>
 </span><span class='line'>    <span class="k">return</span> <span class="n">wrapper</span>
 </span><span class='line'>
 </span><span class='line'><span class="nd">@decorator</span><span class="p">(</span><span class="s">&#39;foo&#39;</span><span class="p">)</span>
