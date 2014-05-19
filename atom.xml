@@ -4,7 +4,7 @@
   <title><![CDATA[高立营]]></title>
   <link href="http://gaoliying.github.io/atom.xml" rel="self"/>
   <link href="http://gaoliying.github.io/"/>
-  <updated>2014-05-19T11:47:09+08:00</updated>
+  <updated>2014-05-19T11:54:21+08:00</updated>
   <id>http://gaoliying.github.io/</id>
   <author>
     <name><![CDATA[高立营]]></name>
@@ -131,7 +131,7 @@
 <p>下面是python解释器执行with时的详细步骤：</p>
 
 <ol>
-<li>with语句将Saved对象保存在临时的，隐藏的变量中用于，或赋给as之后的变量；</li>
+<li>with语句将Saved对象保存在临时的，隐藏的变量中，或赋给as之后的变量；</li>
 <li>with语句调用Saved对象的<strong>enter</strong>方法，使context manager工作；</li>
 <li><strong>enter</strong>方法调用在cairo的context中调用save；</li>
 <li><strong>enter</strong>方法返回cairo context，但是我们还没有指定“as”变量，所以不保存返回的值；</li>
