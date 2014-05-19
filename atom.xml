@@ -4,7 +4,11 @@
   <title><![CDATA[高立营]]></title>
   <link href="http://gaoliying.github.io/atom.xml" rel="self"/>
   <link href="http://gaoliying.github.io/"/>
+<<<<<<< HEAD
   <updated>2014-05-19T10:50:22+08:00</updated>
+=======
+  <updated>2014-05-10T11:33:25+08:00</updated>
+>>>>>>> 34412cd02f6e862bd3781ab3c15431e7fc258e12
   <id>http://gaoliying.github.io/</id>
   <author>
     <name><![CDATA[高立营]]></name>
@@ -14,6 +18,7 @@
 
   
   <entry>
+<<<<<<< HEAD
     <title type="html"><![CDATA[python中with语句的用法]]></title>
     <link href="http://gaoliying.github.io/blog/2014/05/18/with/"/>
     <updated>2014-05-18T21:00:53+08:00</updated>
@@ -288,6 +293,8 @@
   </entry>
   
   <entry>
+=======
+>>>>>>> 34412cd02f6e862bd3781ab3c15431e7fc258e12
     <title type="html"><![CDATA[博客样式初步确定]]></title>
     <link href="http://gaoliying.github.io/blog/2014/05/10/the-entire-blog-is-almost-done/"/>
     <updated>2014-05-10T10:56:23+08:00</updated>

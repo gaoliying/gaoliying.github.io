@@ -2,6 +2,7 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://gaoliying.github.io/blog/2014/05/08/first-acticle-in-octopress/</loc>
+<<<<<<< HEAD
         <lastmod>2014-05-12T14:36:18+08:00</lastmod>
     </url>
     <url>
@@ -23,6 +24,7 @@
     <url>
         <loc>http://gaoliying.github.io/</loc>
         <lastmod>2014-05-19T10:40:16+08:00</lastmod>
+=======
         <lastmod>2014-05-10T11:03:15+08:00</lastmod>
     </url>
     <url>
@@ -40,5 +42,6 @@
     <url>
         <loc>http://gaoliying.github.io/robots.txt</loc>
         <lastmod>2014-05-08T09:50:03+08:00</lastmod>
+>>>>>>> 34412cd02f6e862bd3781ab3c15431e7fc258e12
     </url>
 </urlset>

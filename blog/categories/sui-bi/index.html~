@@ -5,17 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>所有文章 - 高立营</title>
+  <title>Category: 随笔 - 高立营</title>
   <meta name="author" content="高立营">
 
   
-  <meta name="description" content="所有文章 2014 python中with语句的用法
-May 18 2014 posted in backend 博客样式初步确定
-May 10 2014 posted in 随笔 我的第一篇markdown文章
-May 08 2014 posted in 随笔 近期文章 &hellip;">
-  <meta name="description" content=" 所有文章 2014 博客样式初步确定
-May 10 2014 posted in 随笔 我的第一篇markdown文章
-May 08 2014 posted in 随笔 近期文章 博客样式初步确定 我的第一篇markdown文章 ">
+  <meta name="description" content="Category: 随笔">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -24,7 +18,7 @@ May 08 2014 posted in 随笔 近期文章 博客样式初步确定 我的第一�
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://gaoliying.github.io/blog/archives">
+  <link rel="canonical" href="http://gaoliying.github.ioblog/categories/sui-bi">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen-format.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/custom.css" media="screen, projection" rel="stylesheet" type="text/css">
@@ -76,11 +70,11 @@ May 08 2014 posted in 随笔 近期文章 博客样式初步确定 我的第一�
 <article role="article">
   
   <header>
-    <h1 class="entry-title">所有文章</h1>
+    <h1 class="entry-title">Category: 随笔</h1>
     
   </header>
   
-  <div id="blog-archives">
+  <div id="blog-archives" class="category">
 
 
 
@@ -89,23 +83,6 @@ May 08 2014 posted in 随笔 近期文章 博客样式初步确定 我的第一�
 
 <article>
   
-<<<<<<< HEAD
-<h1><a href="/blog/2014/05/18/with/">python中with语句的用法</a></h1>
-<time datetime="2014-05-18T21:00:53+08:00" pubdate><span class='month'>May</span> <span class='day'>18</span> <span class='year'>2014</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/backend/'>backend</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-=======
->>>>>>> 34412cd02f6e862bd3781ab3c15431e7fc258e12
 <h1><a href="/blog/2014/05/10/the-entire-blog-is-almost-done/">博客样式初步确定</a></h1>
 <time datetime="2014-05-10T10:56:23+08:00" pubdate><span class='month'>May</span> <span class='day'>10</span> <span class='year'>2014</span></time>
 
