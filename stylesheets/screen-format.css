@@ -590,7 +590,7 @@ aside.sidebar {
 }
 }@media only screen and (min-width:768px) {
 	ul,ol {
-	margin-left:0
+	margin-left:40px;
 }
 }body>header {
 	/*background:#222*/
