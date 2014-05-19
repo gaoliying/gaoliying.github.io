@@ -4,7 +4,7 @@
   <title><![CDATA[Category: backend | 高立营]]></title>
   <link href="http://gaoliying.github.io/blog/categories/backend/atom.xml" rel="self"/>
   <link href="http://gaoliying.github.io/"/>
-  <updated>2014-05-19T21:20:54+08:00</updated>
+  <updated>2014-05-19T21:22:46+08:00</updated>
   <id>http://gaoliying.github.io/</id>
   <author>
     <name><![CDATA[高立营]]></name>
@@ -100,7 +100,7 @@
 </pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">F</span><span class="p">):</span>                   <span class="c"># On @ decoration</span>
 </span><span class='line'>    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>             <span class="c"># On wrapped function call</span>
 </span><span class='line'>        <span class="c"># Use F and args</span>
-</span><span class='line'>    <span class="c"># F(*args) calls original function</span>
+</span><span class='line'>        <span class="c"># F(*args) calls original function</span>
 </span><span class='line'>    <span class="k">return</span> <span class="n">wrapper</span>
 </span><span class='line'>
 </span><span class='line'><span class="nd">@decorator</span>                      <span class="c"># func = decorator(func)</span>
@@ -132,7 +132,7 @@
 </span><span class='line'>    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
 </span><span class='line'>        <span class="k">def</span> <span class="nf">inner_wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>           <span class="c"># On wrapped function call</span>
 </span><span class='line'>            <span class="c"># Use var and args</span>
-</span><span class='line'>        <span class="c"># F(*args) calls original function</span>
+</span><span class='line'>            <span class="c"># F(*args) calls original function</span>
 </span><span class='line'>        <span class="k">return</span> <span class="n">inner_wrapper</span>
 </span><span class='line'>    <span class="k">return</span> <span class="n">wrapper</span>
 </span><span class='line'>
@@ -175,7 +175,7 @@
 </div>
 
 
-
+<p>参考链接：<a href="http://www.cnblogs.com/Jerry-Chou/archive/2012/05/23/2515004.html">http://www.cnblogs.com/Jerry-Chou/archive/2012/05/23/2515004.html</a></p>
 ]]></content>
   </entry>
   
