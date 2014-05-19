@@ -1,0 +1,539 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>python中with语句的用法 - 高立营</title>
+  <meta name="author" content="高立营">
+
+  
+  <meta name="description" content="">
+  <meta name="keywords" content="python with cairo context manager yield">
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://gaoliying.github.io/blog/2014/05/18/with">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen-format.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/custom.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="高立营" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+
+  <header role="banner">
+  	<hgroup>
+  <h1><a href="/">高立营</a></h1>
+</hgroup>
+
+
+  	<nav role="navigation"><!-- <ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:gaoliying.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+   -->
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/categories/sui-bi">随笔</a></li>
+  <li><a href="/blog/archives">所有文章</a></li>
+</ul>
+
+</nav>
+  </header>
+  
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">python中with语句的用法</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2014-05-18T21:00:53+08:00" pubdate data-updated="true">2014/05/18 </time>
+        
+        
+          | <a href="#comments">评论</a>
+         
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>with语句在python2.5中引入，可以非常方便地处理两个相关的操作，with语句块在这两个操作中间执行。其典型的应用是打开文件，操作文件，然后关闭文件。</p>
+
+<div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;output.txt&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span><span class='line'>    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;Hi there!&#39;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+<p>上述with语句会在嵌套的代码执行完后自动关闭文件。当with语句块中抛出异常时，在这个异常被外层处理器捕获之前，文件会被关闭。当嵌套的with语句中执行到return，continue，break等语句时，文件也会被关闭。</p>
+
+<p>下面列举另一个例子。pycairo是python的图形库。其Context类提供save()方法，用来将当前的绘图状态压入栈中，以及一个restore()方法用来从栈顶恢复前一个绘图状态。这两个函数一般成对地调用。</p>
+
+<p>以下代码用一个Context对象来画六个长方形，每个长方形旋转了不同的角度。每当调用rotate时实际上结合了当前的变换。因此在循环的每一次迭代时我们用一对save和restore来保存绘图状态。这样就避免了旋转操作结合上一次旋转。</p>
+
+<div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">cr</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="mi">68</span><span class="p">,</span> <span class="mi">68</span><span class="p">)</span>
+</span><span class='line'><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
+</span><span class='line'>    <span class="n">cr</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</span><span class='line'>    <span class="n">cr</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">i</span> <span class="o">/</span> <span class="mi">6</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">cr</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="o">-</span><span class="mi">25</span><span class="p">,</span> <span class="o">-</span><span class="mi">60</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">cr</span><span class="o">.</span><span class="n">stroke</span><span class="p">()</span>
+</span><span class='line'>    <span class="n">cr</span><span class="o">.</span><span class="n">restore</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+
+
+<div>
+<img class="{{ root_url" src="}}/images/2014-5/six-rectangles.png" title="'六个矩形'" >
+</div>
+
+
+<p>这是一个非常简单的例子，但是对于大型程序来说每次跟踪哪个save和哪个restore配对是很麻烦的。with语句可以使这种代码变得简介一些。</p>
+
+<p>pycairo不支持with，所以我们必须自己编程实现它。有两种办法来实现：
+&ndash; 实现一个context manager类
+&ndash; 写一个生成器函数</p>
+
+<h3>实现一个context manager类</h3>
+
+<p>我们现在定义一个包含<strong>enter</strong>和<strong>exit</strong>方法的类：</p>
+
+<div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">class</span> <span class="nc">Saved</span><span class="p">():</span>
+</span><span class='line'>    <span class="sd">&quot;&quot;&quot; Saved可以被认为是context manager &quot;&quot;&quot;</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cr</span><span class="p">):</span>
+</span><span class='line'>        <span class="bp">self</span><span class="o">.</span><span class="n">cr</span> <span class="o">=</span> <span class="n">cr</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class='line'>        <span class="bp">self</span><span class="o">.</span><span class="n">cr</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</span><span class='line'>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cr</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">type</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">traceback</span><span class="p">):</span>
+</span><span class='line'>        <span class="bp">self</span><span class="o">.</span><span class="n">cr</span><span class="o">.</span><span class="n">restore</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+
+
+<div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">cr</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="mi">68</span><span class="p">,</span> <span class="mi">68</span><span class="p">)</span>
+</span><span class='line'><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">with</span> <span class="n">Saved</span><span class="p">(</span><span class="n">cr</span><span class="p">):</span>
+</span><span class='line'>        <span class="n">cr</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">i</span> <span class="o">/</span> <span class="mi">6</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">cr</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="o">-</span><span class="mi">25</span><span class="p">,</span> <span class="o">-</span><span class="mi">60</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">cr</span><span class="o">.</span><span class="n">stroke</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+<p>下面是python解释器执行with时的详细步骤：</p>
+
+<ol>
+<li>with语句将Saved对象保存在临时的，隐藏的变量中用于，或赋给as之后的变量；</li>
+<li>with语句调用Saved对象的<strong>enter</strong>方法，使context manager工作；</li>
+<li><strong>enter</strong>方法调用在cairo的context中调用save；</li>
+<li><strong>enter</strong>方法返回cairo context，但是我们还没有指定“as”变量，所以不保存返回的值；</li>
+<li>嵌套语句快执行；</li>
+<li>在嵌套语句块的结尾，with语句调用Saved对象的<strong>exit</strong>方法，传入(None, None, None)代表没有异常发生；</li>
+<li><strong>exit</strong>方法在cairo context上调用restore。</li>
+</ol>
+
+
+<h3>异常处理</h3>
+
+<p>当with中嵌套的语句抛出异常时，比如我们传递错误的参数给rectangle方法，python解释器处理异常的步骤如下：</p>
+
+<ol>
+<li>rectangle方法抛出一个TypeError异常；</li>
+<li>with语句捕获这个异常；</li>
+<li>with语句调用Saved对象上的<strong>exit</strong>方法，传递关于异常的三个参数：(type, value, traceback)&mdash;当你调用sys.exc_info时会得到相同的值。这将告诉<strong>exit</strong>方法所有的信息。</li>
+<li>在这种情况下，<strong>exit</strong>方法在cairo context上调用restore，然后返回None。（在python中，当没有return语句时总是返回None）；</li>
+<li>with语句检查返回值是否是True，因为不是，所以with语句重新抛出TypeError异常，外层函数可能处理这个异常。</li>
+</ol>
+
+
+<p>这样，不管一层发生与否，我们都能保证restore永远会在cairo context上被调用。</p>
+
+<h3>以生成器来实现Context manager</h3>
+
+<p>下面是并不完整的生成器函数，因为它不能很好地处理异常：</p>
+
+<div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">from</span> <span class="nn">contextlib</span> <span class="kn">import</span> <span class="n">contextmanager</span>
+</span><span class='line'>
+</span><span class='line'><span class="nd">@contextmanager</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">saved</span><span class="p">(</span><span class="n">cr</span><span class="p">):</span>
+</span><span class='line'>    <span class="n">cr</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</span><span class='line'>    <span class="k">yield</span> <span class="n">cr</span>
+</span><span class='line'>    <span class="n">cr</span><span class="o">.</span><span class="n">restore</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+<p>生成器看似比之前那个方法简单一些。但是这个方法要执行更多的步骤。想要完全理解它，除了对面向对象编程要熟悉之外，还必须对python装饰器，生成器，迭代器和返回函数的函数非常熟悉。</p>
+
+<p>这种方法需要contextlib库中的两个对象：</p>
+
+<ol>
+<li>contextmanager函数；</li>
+<li>GeneratorContextManager类。</li>
+</ol>
+
+
+<p>现在我简单写一些我对contextlib.py的理解。我们从生成器开始讲起，下面是代码执行的步骤：</p>
+
+<ol>
+<li>python解释器能够识别yield表达式。因此def不是声明一个通常的函数，而是创建了一个生成器函数；</li>
+<li>因为def有@contextmanager装饰器，所以contextmanager以生成器函数为参数被调用；</li>
+<li>contextmanager函数返回一个工厂函数。这个工厂函数创建一个GeneratorContextManager对象；</li>
+<li>最后工厂函数被赋给saved。从此开始我们每次调用saved其实是调用这个工厂函数。</li>
+</ol>
+
+
+<p>现在我们可以这样调用saved：</p>
+
+<div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">with</span> <span class="n">saved</span><span class="p">(</span><span class="n">cr</span><span class="p">):</span>
+</span><span class='line'>        <span class="n">cr</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">i</span> <span class="o">/</span> <span class="mi">6</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">cr</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="o">-</span><span class="mi">25</span><span class="p">,</span> <span class="o">-</span><span class="mi">60</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">cr</span><span class="o">.</span><span class="n">stroke</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+<p>当python解释器遇到with语句时，执行步骤如下：</p>
+
+<ol>
+<li>with语句调用saved，当然saved又调用工厂函数，传入一个cairo context&mdash;cr作为唯一参数；</li>
+<li>工厂函数把cairo context传入生成器函数，创建一个生成器generator；</li>
+<li>generator被传入GeneratorContextManager；</li>
+<li>with语句将GeneratorContextManager保存在一个临时的，隐藏的变量中（事实上with只保存<strong>exit</strong>方法）；</li>
+<li>with语句在GeneratorContextManager对象上调用<strong>exit</strong>；</li>
+<li><strong>enter</strong>在generator上调用next；</li>
+<li>生成器函数（在def saved(cr)下面的代码块）运行直到yield表达式。这在cairo context上调用save；</li>
+<li>yield表达式产生cairo context，cairo context变成在迭代器上调用next的返回值；</li>
+<li><strong>enter</strong>方法返回cairo context，但是我们没有声明“as”，所以cairo context没有被保存下来；</li>
+<li>嵌套的代码块被执行。这将设置旋转以及画一个矩形；</li>
+<li>在嵌套的代码块的底部，with语句在GeneratorContextManager上调用<strong>exit</strong>方法；</li>
+<li><strong>exit</strong>方法在迭代器上调用next(期待一个StopIterration异常发生);</li>
+<li>生成器在yield之后恢复执行，这在cairo context上调用restore；</li>
+<li>生成器返回，抛出一个StopIteration异常（就像期待的一样）;</li>
+<li><strong>exit</strong>捕获这个异常，正常返回。</li>
+</ol>
+
+
+<p>这样我们就成功地将这个生成器函数当成with语句的context manager。为了正确地处理异常，我们还需要改善一下生成器函数。</p>
+
+<h3>处理异常</h3>
+
+<p>现在我们还是假设把错误的参数传入rectangle函数，下面是出现的情况：</p>
+
+<ol>
+<li>rectangle函数抛出一个TypeError异常；</li>
+<li>with语句捕获这个异常；</li>
+<li>with语句在GeneratorContextManager对象上调用<strong>exit</strong>，把关于异常的信息(type, value, traceback)传入；</li>
+<li><strong>exit</strong>在迭代器上调用throw，传入相同的三个参数；</li>
+<li>TypeError异常在生成器函数的上下文中被抛出，在yield表达式那一行。</li>
+</ol>
+
+
+<p>现在的生成器函数还有一个问题;restore不会在cairo context上被调用。因为yield表达式抛出一个异常，所以剩下的语句不会被执行。我们必须在yield周围加入一个try／finally块让生成器函数更加健壮：</p>
+
+<div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="nd">@contextmanager</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">saved</span><span class="p">(</span><span class="n">cr</span><span class="p">):</span>
+</span><span class='line'>    <span class="n">cr</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</span><span class='line'>    <span class="k">try</span><span class="p">:</span>
+</span><span class='line'>        <span class="k">yield</span> <span class="n">cr</span>
+</span><span class='line'>    <span class="k">finally</span><span class="p">:</span>
+</span><span class='line'>        <span class="n">cr</span><span class="o">.</span><span class="n">restore</span><span class="p">()</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+<ol>
+<li>在生成器中，finally块执行。这会在cairo context上调用restore；</li>
+<li>TypeError不被生成器处理，所以它在<strong>exit</strong>方法中重新被抛出；</li>
+<li><strong>exit</strong>捕获TypeError；</li>
+<li><strong>exit</strong>得知捕获的异常和传入的异常是一样的，结果返回None；</li>
+<li>with语句检查返回值是否是真，因为不是，所以重新抛出TypeError异常，现在这个异常将在外层代码中被捕获。</li>
+</ol>
+
+
+<h3>总结</h3>
+
+<p>如果你像我一样很难完全理解with语句&mdash;尤其你对生成器感兴趣&mdash;不要灰心。这非常复杂，掺杂了python语言的很多特性，一些特性还是刚刚加入到python标准。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">高立营</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2014-05-18T21:00:53+08:00" pubdate data-updated="true">2014/05/18 </time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/backend/'>backend</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/05/10/the-entire-blog-is-almost-done/" title="Previous Post: 博客样式初步确定">&laquo; 博客样式初步确定</a>
+      
+      
+    </p>
+    
+    <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a><a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"32"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","fbook","twi"],"viewText":"分享到：","viewSize":"16"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+    
+  </footer>
+  
+
+
+  
+</article>
+
+
+
+  <section>
+    <h1>评论：</h1>
+    <div id="comments" aria-live="polite"><!-- Duoshuo Comment BEGIN --> 
+<div class="ds-thread" data-title=""></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"gly"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<style type="text/css">
+
+#ds-reset .ds-highlight{
+	color:#3A99B1; !important
+}
+
+#ds-reset .ds-avatar{
+	box-shadow: 0px 0px 0px white;
+	background-color: transparent;
+}
+
+#ds-reset .ds-avatar img{
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	-ms-border-radius: 50%;
+	-o-border-radius: 50%;
+	border-radius: 50%;
+}
+ul.ds-comments p{
+	color: #eee;
+}
+
+#ds-thread #ds-reset a{
+	color:#eee;
+}
+#ds-thread #ds-reset a:hover{
+	color:#3A99B1;
+}
+
+#ds-reset{
+	color:#eee;
+}
+#ds-thread #ds-reset .ds-comment-body a:hover{
+	color:#ccc;
+}
+#ds-thread #ds-reset .ds-login-buttons .ds-more-services{
+	color:#eee;
+}
+#ds-thread #ds-reset .ds-login-buttons .ds-more-services:hover{
+	color: #3A99B1;
+}
+</style>
+<!-- Duoshuo Comment END -->
+</div>
+  </section>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>近期文章</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/05/18/with/">python中with语句的用法</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/10/the-entire-blog-is-almost-done/">博客样式初步确定</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/08/first-acticle-in-octopress/">我的第一篇markdown文章</a>
+      </li>
+    
+  </ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - 高立营 -
+  <span class="credit">Powered by <a href="http://octopress.org" target="_blank">Octopress</a> - </span>
+  <span class="designer">Designed by <a href="/">高立营</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
