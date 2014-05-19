@@ -4,7 +4,7 @@
   <title><![CDATA[Category: backend | 高立营]]></title>
   <link href="http://gaoliying.github.io/blog/categories/backend/atom.xml" rel="self"/>
   <link href="http://gaoliying.github.io/"/>
-  <updated>2014-05-19T11:42:40+08:00</updated>
+  <updated>2014-05-19T11:47:09+08:00</updated>
   <id>http://gaoliying.github.io/</id>
   <author>
     <name><![CDATA[高立营]]></name>
@@ -276,9 +276,9 @@
 
 <h3>总结</h3>
 
-<p>如果你像我一样很难完全理解with语句&mdash;尤其你对生成器感兴趣&mdash;不要灰心。这非常复杂，掺杂了python语言的很多特性，一些特性还是刚刚加入到python标准。</p>
+<blockquote><p>如果你像我一样很难完全理解with语句&mdash;尤其你对生成器感兴趣&mdash;不要灰心。这非常复杂，掺杂了python语言的很多特性，一些特性还是刚刚加入到python标准。</p></blockquote>
 
-<p>参考链接：<a href="http://preshing.com/20110920/the-python-with-statement-by-example/">http://preshing.com/20110920/the-python-with-statement-by-example/</a></p>
+<p>参考链接：<a href="http://preshing.com/20110920/the-python-with-statement-by-example/" target="_blank"><a href="http://preshing.com/20110920/the-python-with-statement-by-example/">http://preshing.com/20110920/the-python-with-statement-by-example/</a></a></p>
 ]]></content>
   </entry>
   
