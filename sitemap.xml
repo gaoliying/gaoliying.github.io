@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
+    <url>
+        <loc>http://gaoliying.github.io/blog/2014/05/08/first-acticle-in-octopress/</loc>
+        <lastmod>2014-05-10T11:03:15+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://gaoliying.github.io/blog/2014/05/10/the-entire-blog-is-almost-done/</loc>
+        <lastmod>2014-05-10T11:33:11+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://gaoliying.github.io/blog/archives/</loc>
+        <lastmod>2014-05-10T11:33:11+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://gaoliying.github.io/</loc>
+        <lastmod>2014-05-10T11:33:11+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://gaoliying.github.io/robots.txt</loc>
+        <lastmod>2014-05-08T09:50:03+08:00</lastmod>
+    </url>
+</urlset>
