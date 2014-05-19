@@ -4,7 +4,7 @@
   <title><![CDATA[高立营]]></title>
   <link href="http://gaoliying.github.io/atom.xml" rel="self"/>
   <link href="http://gaoliying.github.io/"/>
-  <updated>2014-05-19T16:07:42+08:00</updated>
+  <updated>2014-05-19T21:18:31+08:00</updated>
   <id>http://gaoliying.github.io/</id>
   <author>
     <name><![CDATA[高立营]]></name>
@@ -12,6 +12,184 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[python中的装饰器(decorator)语法]]></title>
+    <link href="http://gaoliying.github.io/blog/2014/05/19/decorator/"/>
+    <updated>2014-05-19T20:36:09+08:00</updated>
+    <id>http://gaoliying.github.io/blog/2014/05/19/decorator</id>
+    <content type="html"><![CDATA[<h3>什么是装饰器？</h3>
+
+<p>装饰器是python提供的一种管理函数或类的方式。装饰器本身是可执行的对象(比如函数)，它的功能是处理其他的可执行对象。装饰器有两种：</p>
+
+<ul>
+<li>函数装饰器</li>
+<li>类装饰器</li>
+</ul>
+
+
+<p>总之，装饰器在函数或类定义之后插入一段自动执行的代码。</p>
+
+<!-- more -->
+
+
+<h3>函数装饰器&mdash;Function Decorators</h3>
+
+<p>执行下面两段代码片段的效果是一样的：</p>
+
+<div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+</span><span class='line'>    <span class="c"># process f</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">f</span>
+</span><span class='line'>
+</span><span class='line'><span class="nd">@decorator</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">func</span><span class="p">():</span> <span class="k">pass</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">func</span><span class="p">()</span>      <span class="c"># run func</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+
+
+<div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+</span><span class='line'>    <span class="c"># process f</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">f</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">func</span><span class="p">():</span> <span class="k">pass</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">func</span> <span class="o">=</span> <span class="n">decorator</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>    <span class="c"># rebind func to the returned callable object</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">func</span><span class="p">()</span>    <span class="c"># run func</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+<p>当func函数接受参数时，一个更好的办法是将func的参数传入内层wrapper函数中：</p>
+
+<div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">F</span><span class="p">):</span>                      <span class="c"># On @ decoration</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>                <span class="c"># On wrapped function call</span>
+</span><span class='line'>        <span class="c"># Use F and args</span>
+</span><span class='line'>  <span class="c"># F(*args) calls original function</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">wrapper</span>
+</span><span class='line'>
+</span><span class='line'><span class="nd">@decorator</span>                        <span class="c"># func = decorator(func)</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>                 <span class="c"># func is passed to decorator&#39;s F</span>
+</span><span class='line'>    <span class="o">...</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">func</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>                    <span class="c"># 6, 7 are passed to wrapper&#39;s *args</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+<p>当装饰器本身接受一些参数时，我们可以在装饰器函数内再增加一个wrapper来接受这些参数：</p>
+
+<div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">var</span><span class="p">):</span>                    <span class="c"># On @ decoration</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+</span><span class='line'>        <span class="k">def</span> <span class="nf">inner_wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>          <span class="c"># On wrapped function call</span>
+</span><span class='line'>            <span class="c"># Use var and args</span>
+</span><span class='line'>      <span class="c"># F(*args) calls original function</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">inner_wrapper</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">wrapper</span>
+</span><span class='line'>
+</span><span class='line'><span class="nd">@decorator</span><span class="p">(</span><span class="s">&#39;foo&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>                 <span class="c"># func is passed to decorator&#39;s F</span>
+</span><span class='line'>    <span class="o">...</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">func</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>                    <span class="c"># 6, 7 are passed to inner_wrapper&#39;s *args</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+<h3>应用多个装饰器</h3>
+
+<p>多个装饰器可以同时嵌套地处理一个函数：</p>
+
+<div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="nd">@A</span>
+</span><span class='line'><span class="nd">@B</span>
+</span><span class='line'><span class="nd">@C</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">f</span><span class="p">():</span> <span class="k">pass</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+<p>效果等同于下面的代码：</p>
+
+<div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">f</span><span class="p">():</span> <span class="k">pass</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">f</span> <span class="o">=</span> <span class="n">A</span><span class="p">(</span><span class="n">B</span><span class="p">(</span><span class="n">C</span><span class="p">(</span><span class="n">f</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[python中with语句的用法]]></title>

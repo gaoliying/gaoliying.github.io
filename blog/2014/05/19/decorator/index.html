@@ -1,0 +1,449 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>python中的装饰器(decorator)语法 - 高立营</title>
+  <meta name="author" content="高立营">
+
+  
+  <meta name="description" content="什么是装饰器？ 装饰器是python提供的一种管理函数或类的方式。装饰器本身是可执行的对象(比如函数)，它的功能是处理其他的可执行对象。装饰器有两种： 函数装饰器
+类装饰器 总之，装饰器在函数或类定义之后插入一段自动执行的代码。 函数装饰器&mdash;Function Decorators &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://gaoliying.github.io/blog/2014/05/19/decorator">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen-format.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/custom.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="高立营" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+
+  <header role="banner">
+  	<hgroup>
+  <h1><a href="/">高立营</a></h1>
+</hgroup>
+
+
+  	<nav role="navigation"><!-- <ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:gaoliying.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+   -->
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/categories/backend">后端</a></li>
+  <li><a href="/blog/categories/sui-bi">随笔</a></li>
+  <li><a href="/blog/archives">所有文章</a></li>
+</ul>
+
+</nav>
+  </header>
+  
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">python中的装饰器(decorator)语法</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2014-05-19T20:36:09+08:00" pubdate data-updated="true">2014/05/19 </time>
+        
+        
+          | <a href="#comments">评论</a>
+         
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h3>什么是装饰器？</h3>
+
+<p>装饰器是python提供的一种管理函数或类的方式。装饰器本身是可执行的对象(比如函数)，它的功能是处理其他的可执行对象。装饰器有两种：</p>
+
+<ul>
+<li>函数装饰器</li>
+<li>类装饰器</li>
+</ul>
+
+
+<p>总之，装饰器在函数或类定义之后插入一段自动执行的代码。</p>
+
+<!-- more -->
+
+
+<h3>函数装饰器&mdash;Function Decorators</h3>
+
+<p>执行下面两段代码片段的效果是一样的：</p>
+
+<div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+</span><span class='line'>    <span class="c"># process f</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">f</span>
+</span><span class='line'>
+</span><span class='line'><span class="nd">@decorator</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">func</span><span class="p">():</span> <span class="k">pass</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">func</span><span class="p">()</span>      <span class="c"># run func</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+
+
+<div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+</span><span class='line'>    <span class="c"># process f</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">f</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">def</span> <span class="nf">func</span><span class="p">():</span> <span class="k">pass</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">func</span> <span class="o">=</span> <span class="n">decorator</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>    <span class="c"># rebind func to the returned callable object</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">func</span><span class="p">()</span>    <span class="c"># run func</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+<p>当func函数接受参数时，一个更好的办法是将func的参数传入内层wrapper函数中：</p>
+
+<div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">F</span><span class="p">):</span>                      <span class="c"># On @ decoration</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>                <span class="c"># On wrapped function call</span>
+</span><span class='line'>        <span class="c"># Use F and args</span>
+</span><span class='line'>  <span class="c"># F(*args) calls original function</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">wrapper</span>
+</span><span class='line'>
+</span><span class='line'><span class="nd">@decorator</span>                        <span class="c"># func = decorator(func)</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>                 <span class="c"># func is passed to decorator&#39;s F</span>
+</span><span class='line'>    <span class="o">...</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">func</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>                    <span class="c"># 6, 7 are passed to wrapper&#39;s *args</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+<p>当装饰器本身接受一些参数时，我们可以在装饰器函数内再增加一个wrapper来接受这些参数：</p>
+
+<div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">var</span><span class="p">):</span>                    <span class="c"># On @ decoration</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+</span><span class='line'>        <span class="k">def</span> <span class="nf">inner_wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>          <span class="c"># On wrapped function call</span>
+</span><span class='line'>            <span class="c"># Use var and args</span>
+</span><span class='line'>      <span class="c"># F(*args) calls original function</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">inner_wrapper</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">wrapper</span>
+</span><span class='line'>
+</span><span class='line'><span class="nd">@decorator</span><span class="p">(</span><span class="s">&#39;foo&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>                 <span class="c"># func is passed to decorator&#39;s F</span>
+</span><span class='line'>    <span class="o">...</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">func</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>                    <span class="c"># 6, 7 are passed to inner_wrapper&#39;s *args</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+<h3>应用多个装饰器</h3>
+
+<p>多个装饰器可以同时嵌套地处理一个函数：</p>
+
+<div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="nd">@A</span>
+</span><span class='line'><span class="nd">@B</span>
+</span><span class='line'><span class="nd">@C</span>
+</span><span class='line'><span class="k">def</span> <span class="nf">f</span><span class="p">():</span> <span class="k">pass</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+<p>效果等同于下面的代码：</p>
+
+<div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="k">def</span> <span class="nf">f</span><span class="p">():</span> <span class="k">pass</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">f</span> <span class="o">=</span> <span class="n">A</span><span class="p">(</span><span class="n">B</span><span class="p">(</span><span class="n">C</span><span class="p">(</span><span class="n">f</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">高立营</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2014-05-19T20:36:09+08:00" pubdate data-updated="true">2014/05/19 </time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/backend/'>backend</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/05/18/with/" title="Previous Post: python中with语句的用法">&laquo; python中with语句的用法</a>
+      
+      
+    </p>
+    
+    <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a><a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"32"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","fbook","twi"],"viewText":"分享到：","viewSize":"16"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+    
+  </footer>
+  
+
+
+  
+</article>
+
+
+
+  <section>
+    <h1>评论：</h1>
+    <div id="comments" aria-live="polite"><!-- Duoshuo Comment BEGIN --> 
+<div class="ds-thread" data-title=""></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"gly"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<style type="text/css">
+
+#ds-reset .ds-highlight{
+	color:#3A99B1; !important
+}
+
+#ds-reset .ds-avatar{
+	box-shadow: 0px 0px 0px white;
+	background-color: transparent;
+}
+
+#ds-reset .ds-avatar img{
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	-ms-border-radius: 50%;
+	-o-border-radius: 50%;
+	border-radius: 50%;
+}
+ul.ds-comments p{
+	color: #eee;
+}
+
+#ds-thread #ds-reset a{
+	color:#eee;
+}
+#ds-thread #ds-reset a:hover{
+	color:#3A99B1;
+}
+
+#ds-reset{
+	color:#eee;
+}
+#ds-thread #ds-reset .ds-comment-body a:hover{
+	color:#ccc;
+}
+#ds-thread #ds-reset .ds-login-buttons .ds-more-services{
+	color:#eee;
+}
+#ds-thread #ds-reset .ds-login-buttons .ds-more-services:hover{
+	color: #3A99B1;
+}
+</style>
+<!-- Duoshuo Comment END -->
+</div>
+  </section>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>近期文章</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/05/19/decorator/">python中的装饰器(decorator)语法</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/18/with/">python中with语句的用法</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/10/the-entire-blog-is-almost-done/">博客样式初步确定</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/08/first-acticle-in-octopress/">我的第一篇markdown文章</a>
+      </li>
+    
+  </ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - 高立营 -
+  <span class="credit">Powered by <a href="http://octopress.org" target="_blank">Octopress</a> - </span>
+  <span class="designer">Designed by <a href="/">高立营</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
