@@ -4,7 +4,7 @@
   <title><![CDATA[高立营]]></title>
   <link href="http://gaoliying.github.io/atom.xml" rel="self"/>
   <link href="http://gaoliying.github.io/"/>
-  <updated>2014-05-19T11:54:21+08:00</updated>
+  <updated>2014-05-19T11:56:35+08:00</updated>
   <id>http://gaoliying.github.io/</id>
   <author>
     <name><![CDATA[高立营]]></name>
@@ -154,7 +154,7 @@
 </ol>
 
 
-<p>这样，不管一层发生与否，我们都能保证restore永远会在cairo context上被调用。</p>
+<p>这样，不管异常发生与否，我们都能保证restore永远会在cairo context上被调用。</p>
 
 <h3>以生成器来实现Context manager</h3>
 
