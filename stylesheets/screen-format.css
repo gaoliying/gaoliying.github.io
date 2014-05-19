@@ -71,7 +71,7 @@ a {
 	//background:#252525 url('/images/line-tile.png?1399513803') top left
 }*/
 body>div {
-	background:rgba(100,100,100,0.6) url('/images/noise.png?1399513803') top left;
+	background:rgba(34,34,34,0.5) url('/images/noise.png?1399513803') top left;
 	/*border-bottom:1px solid #bfbfbf;  modified by gly @2014.5.9  */
 }
 body>div>div {
