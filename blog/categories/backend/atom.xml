@@ -4,7 +4,7 @@
   <title><![CDATA[Category: backend | 高立营]]></title>
   <link href="http://gaoliying.github.io/blog/categories/backend/atom.xml" rel="self"/>
   <link href="http://gaoliying.github.io/"/>
-  <updated>2014-05-19T11:36:54+08:00</updated>
+  <updated>2014-05-19T11:38:30+08:00</updated>
   <id>http://gaoliying.github.io/</id>
   <author>
     <name><![CDATA[高立营]]></name>
@@ -66,9 +66,13 @@
 
 <p>这是一个非常简单的例子，但是对于大型程序来说每次跟踪哪个save和哪个restore配对是很麻烦的。with语句可以使这种代码变得简介一些。</p>
 
-<p>pycairo不支持with，所以我们必须自己编程实现它。有两种办法来实现：
-* 实现一个context manager类
-* 写一个生成器函数</p>
+<p>pycairo不支持with，所以我们必须自己编程实现它。有两种办法来实现：</p>
+
+<ul>
+<li>实现一个context manager类</li>
+<li>写一个生成器函数</li>
+</ul>
+
 
 <h3>实现一个context manager类</h3>
 
