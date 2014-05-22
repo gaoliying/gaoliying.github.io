@@ -1,0 +1,133 @@
+---
+layout: post
+title: "python中的装饰器(decorator)语法"
+date: 2014-05-19 20:36:09 +0800
+comments: true
+categories: backend
+description: "python decorator"
+keywords: "python decorator"
+---
+
+###什么是装饰器？
+
+装饰器是python提供的一种管理函数或类的方式。装饰器本身是可执行的对象(比如函数)，它的功能是处理其他的可执行对象。装饰器有两种：
+
+- 函数装饰器
+- 类装饰器
+
+总之，装饰器在函数或类定义之后插入一段自动执行的代码。
+
+<!-- more -->
+
+###函数装饰器--Function Decorators
+
+执行下面两段代码片段的效果是一样的：
+
+<div>
+{% codeblock lang:python %}
+def decorator(f):
+    # process f
+    return f
+
+@decorator
+def func(): pass
+
+func()      # run func
+{% endcodeblock %}
+</div>
+
+<div>
+{% codeblock lang:python %}
+def decorator(f):
+    # process f
+    return f
+
+def func(): pass
+
+func = decorator(func)    # rebind func to the returned callable object
+
+func()    # run func
+{% endcodeblock %}
+</div>
+
+当func函数接受参数时，一个更好的办法是将func的参数传入内层wrapper函数中：
+
+<div>
+{% codeblock lang:python %}
+def decorator(F):          			# On @ decoration
+    def wrapper(*args):    			# On wrapped function call
+        # Use F and args
+        # F(*args) calls original function
+    return wrapper 
+
+@decorator    					# func = decorator(func)
+def func(x, y):    				# func is passed to decorator's F
+    ... 
+
+func(6, 7)   					# 6, 7 are passed to wrapper's *args
+{% endcodeblock %}
+</div>
+
+当装饰器本身接受一些参数时，我们可以在装饰器函数内再增加一个wrapper来接受这些参数：
+
+<div>
+{% codeblock lang:python %}
+def decorator(var):          			# On @ decoration
+    def wrapper(f):
+        def inner_wrapper(*args):    		# On wrapped function call
+            # Use var and args
+            # F(*args) calls original function
+        return inner_wrapper
+    return wrapper 
+
+@decorator('foo')
+def func(x, y):    				# func is passed to decorator's F
+    ... 
+
+func(6, 7)   					# 6, 7 are passed to inner_wrapper's *args
+{% endcodeblock %}
+</div>
+
+###应用多个装饰器
+
+多个装饰器可以同时嵌套地处理一个函数：
+
+<div>
+{% codeblock lang:python %}
+@A
+@B
+@C
+def f(): pass
+{% endcodeblock %}
+</div>
+
+效果等同于下面的代码：
+
+<div>
+{% codeblock lang:python %}
+def f(): pass
+
+f = A(B(C(f)))
+{% endcodeblock %}
+</div>
+
+参考链接：[http://www.cnblogs.com/Jerry-Chou/archive/2012/05/23/2515004.html](http://www.cnblogs.com/Jerry-Chou/archive/2012/05/23/2515004.html)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
