@@ -4,7 +4,7 @@
   <title><![CDATA[高立营]]></title>
   <link href="http://gaoliying.github.io/atom.xml" rel="self"/>
   <link href="http://gaoliying.github.io/"/>
-  <updated>2014-05-19T21:26:01+08:00</updated>
+  <updated>2014-06-01T23:25:17+08:00</updated>
   <id>http://gaoliying.github.io/</id>
   <author>
     <name><![CDATA[高立营]]></name>
@@ -12,6 +12,159 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[ubuntu下安装nginx服务器]]></title>
+    <link href="http://gaoliying.github.io/blog/2014/06/01/ubuntuxia-an-zhuang-nginxfu-wu-qi/"/>
+    <updated>2014-06-01T21:28:08+08:00</updated>
+    <id>http://gaoliying.github.io/blog/2014/06/01/ubuntuxia-an-zhuang-nginxfu-wu-qi</id>
+    <content type="html"><![CDATA[<h3>nginx服务器简介yum</h3>
+
+<p>nginx,读音(&lsquo;engine x&rsquo;),是一款轻量级的http服务器／反向代理服务器，同时也是邮件(IMAP/POP3/SMTP)代理服务器。由俄罗斯程序工程师Igor Sysoev开发，以epoll和kqueue作为开发模型。其特点是占用内存少，高并发性能优异，能够支持高达50,000个并发连接数的响应。目前世界上大部分排名前1,000的网站采用nginx。</p>
+
+<!-- more -->
+
+
+<h3>安装nginx前的准备</h3>
+
+<p>为了确保在nginx中能够使用正则表达式进行更灵活的配置，安装nginx之前必须确定系统已经安装了PCRE(Perl Compatible Regular Expressions)包。也可以安装openssl。</p>
+
+<div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#切换到PCRE的保存路径，我把它保存在/usr/local/pcre路径下</span>
+</span><span class='line'>sudo mkdir /usr/local/pcre
+</span><span class='line'><span class="nb">cd</span> /usr/local/pcre
+</span><span class='line'>
+</span><span class='line'><span class="c">#下载最新版的PCRE</span>
+</span><span class='line'>wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.33.tar.gz
+</span><span class='line'>
+</span><span class='line'><span class="c">#解压</span>
+</span><span class='line'>tar -zxvf pcre-8.33.tar.gz
+</span><span class='line'>
+</span><span class='line'><span class="c">#安装openssl</span>
+</span><span class='line'>sudo apt-get install openssl
+</span><span class='line'>sudo apt-get install libssl-dev
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+<h3>安装nginx</h3>
+
+<div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#切换到nginx保存路径</span>
+</span><span class='line'>mkdir /usr/local/www
+</span><span class='line'>mkdir /usr/local/www/nginx
+</span><span class='line'><span class="nb">cd</span> /usr/local/www/nginx
+</span><span class='line'>
+</span><span class='line'><span class="c">#下载稳定版nginx</span>
+</span><span class='line'>wget http://nginx.org/download/nginx-1.6.0.tar.gz
+</span><span class='line'>
+</span><span class='line'><span class="c">#解压</span>
+</span><span class='line'>tar -zxvf nginx-1.6.0.tar.gz
+</span><span class='line'>
+</span><span class='line'><span class="c">#配置</span>
+</span><span class='line'><span class="nb">cd </span>nginx-1.6.0
+</span><span class='line'>./configure --prefix<span class="o">=</span>/usr/local/www/nginx --with-pcre<span class="o">=</span>/usr/local/pcre/pcre-8.33 --with-http_stub_status_module --with-http_gzip_static_module
+</span><span class='line'>
+</span><span class='line'><span class="c">#编译</span>
+</span><span class='line'>make
+</span><span class='line'>make install
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+<p>安装完成后的提示信息：</p>
+
+<div>
+<img class="center" src="http://gaoliying.github.io/images/2014-6/DSC-1602.jpg" title="'提示信息'" >
+</div>
+
+
+<p>研究了一下nginx帮助后发现，有-s参数可对nginx服务进行管理：</p>
+
+<div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>root@AY1405311210497418adZ:/usr/local/www/nginx# sbin/nginx -h
+</span><span class='line'>nginx version: nginx/1.6.0
+</span><span class='line'>Usage: nginx <span class="o">[</span>-?hvVtq<span class="o">]</span> <span class="o">[</span>-s signal<span class="o">]</span> <span class="o">[</span>-c filename<span class="o">]</span> <span class="o">[</span>-p prefix<span class="o">]</span> <span class="o">[</span>-g directives<span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'>Options:
+</span><span class='line'>  -?,-h         : this <span class="nb">help</span>
+</span><span class='line'>  -v            : show version and <span class="nb">exit</span>
+</span><span class='line'>  -V            : show version and configure options <span class="k">then </span><span class="nb">exit</span>
+</span><span class='line'>  -t            : <span class="nb">test </span>configuration and <span class="nb">exit</span>
+</span><span class='line'>  -q            : suppress non-error messages during configuration testing
+</span><span class='line'>  -s signal     : send signal to a master process: stop, quit, reopen, reload
+</span><span class='line'>  -p prefix     : <span class="nb">set </span>prefix path <span class="o">(</span>default: /usr/local/www/nginx/<span class="o">)</span>
+</span><span class='line'>  -c filename   : <span class="nb">set </span>configuration file <span class="o">(</span>default: conf/nginx.conf<span class="o">)</span>
+</span><span class='line'>  -g directives : <span class="nb">set </span>global directives out of configuration file
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+<p>因此执行以下命令对nginx重启：</p>
+
+<div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>root@AY1405311210497418adZ:/usr/local/www/nginx# sbin/nginx -s reload
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[python中的装饰器(decorator)语法]]></title>
