@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>博客样式初步确定 - 高立营</title>
+  <title>git管理多个key - 高立营</title>
   <meta name="author" content="高立营">
 
   
-  <meta name="description" content="blog, style, duoshuo">
-  <meta name="keywords" content="blog, style, duoshuo">
+  <meta name="description" content="git中生成多个key以及配置的解决方法">
+  <meta name="keywords" content="git, ssh-keygen, multiple keys, config">
 
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://gaoliying.github.io/blog/2014/05/10/the-entire-blog-is-almost-done">
+  <link rel="canonical" href="http://gaoliying.github.io/blog/2014/06/02/gitguan-li-duo-ge-key">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen-format.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/custom.css" media="screen, projection" rel="stylesheet" type="text/css">
@@ -72,7 +72,7 @@
   
   <header>
     
-      <h1 class="entry-title">博客样式初步确定</h1>
+      <h1 class="entry-title">git管理多个key</h1>
     
     
       <p class="meta">
@@ -89,7 +89,7 @@
 
 
 
-<time datetime="2014-05-10T10:56:23+08:00" pubdate data-updated="true">2014/05/10 </time>
+<time datetime="2014-06-02T10:58:29+08:00" pubdate data-updated="true">2014/06/02 </time>
         
         
           | <a href="#comments">评论</a>
@@ -99,20 +99,80 @@
   </header>
 
 
-<div class="entry-content"><h3>告一段落</h3>
-
-<p>经过两天的设计和调试，博客的外观就变成大家现在看到的样子。外观主体给人的感觉是暗色调的，我看过太多其他人博客是白底黑字，这样虽然给人一种简约的感觉，但是比较单调。所以我决定给自己的博客融入黑色元素。</p>
+<div class="entry-content"><p>在github或者git.oschina.net这样子的代码托管平台上，一个账户只对应一个ssh key。当你在github上创建第二个账户或者在github上同时有个人和公司的账户的时候，在多个账户中添加同一个ssh key就会失败。解决方案是在本地计算机上生成多个key，然后创建一个config配置文件，在配置文件中指定哪个账户使用哪个私有key进行验证。</p>
 
 <!-- more -->
 
 
-<p>同时博客的超链接颜色是墨绿色的，而不是千篇一律的蓝色或黑色。背景图片是从网上下载来的灰黑相间的格子，链接稍后我会给出来。博客的logo(也就是我的名字那三个字)不再使用系统的中文字体，而是立夏手写体，这样子logo就不会给人一种刻板的感觉。下面是一些资源链接：</p>
 
-<p><a href="http://subtlepatterns.com/">网页背景素材</a></p>
 
-<p><a href="http://font.chinaz.com/">字体素材</a></p>
+<div>
 
-<p>博客的主体内容包裹在一层灰色半透明的区域内。每篇博客后面还增加了社会化分享组件，可以使访客方便的分享感兴趣的内容到微薄，微信等平台。最后我还增加了多说评论组件，实现博客留言的功能，而我可以在多说提供的后台管理界面上管理评论内容，非常方便。</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#生成key，指定唯一的文件名，比如sec_rsa，然后一路回车</span>
+</span><span class='line'>gly@gly:~<span class="nv">$ </span>ssh-keygen
+</span><span class='line'>Generating public/private rsa key pair.
+</span><span class='line'>Enter file in which to save the key <span class="o">(</span>/home/gly/.ssh/id_rsa<span class="o">)</span>: sec_rsa
+</span><span class='line'>
+</span><span class='line'><span class="c">#生成config配置文件</span>
+</span><span class='line'><span class="nb">cd</span> ~/.ssh
+</span><span class='line'>touch config
+</span><span class='line'>
+</span><span class='line'><span class="c">#写config文件</span>
+</span><span class='line'>vi config
+</span><span class='line'>
+</span><span class='line'><span class="c">#写入以下内容</span>
+</span><span class='line'>Host sec
+</span><span class='line'>HostName github.com
+</span><span class='line'>IdentityFile ~/.ssh/sec_rsa
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+<p>以后我们就可以用sec代替github.com进行远程克隆或提交：</p>
+
+<div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#只有一个key时添加远程仓库</span>
+</span><span class='line'>git remote add sec git@github.com:user/repo.git
+</span><span class='line'><span class="c">#有多个key时添加远程仓库</span>
+</span><span class='line'>git remote add sec git@sec:user/repo.git
+</span><span class='line'>
+</span><span class='line'><span class="c">#只有一个key时克隆</span>
+</span><span class='line'>git clone git@github.com:user/repo.git
+</span><span class='line'><span class="c">#有多个key时克隆</span>
+</span><span class='line'>git clone git@sec:user/repo.git
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+
 </div>
 
 
@@ -136,12 +196,12 @@
 
 
 
-<time datetime="2014-05-10T10:56:23+08:00" pubdate data-updated="true">2014/05/10 </time>
+<time datetime="2014-06-02T10:58:29+08:00" pubdate data-updated="true">2014/06/02 </time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/sui-bi/'>随笔</a>
+    <a class='category' href='/blog/categories/backend/'>backend</a>
   
 </span>
 
@@ -157,10 +217,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/05/08/first-acticle-in-octopress/" title="Previous Post: 我的第一篇markdown文章">&laquo; 我的第一篇markdown文章</a>
+        <a class="basic-alignment left" href="/blog/2014/06/01/ubuntuxia-an-zhuang-nginxfu-wu-qi/" title="Previous Post: ubuntu下安装nginx服务器">&laquo; ubuntu下安装nginx服务器</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/05/18/with/" title="Next Post: python中with语句的用法">python中with语句的用法 &raquo;</a>
       
     </p>
     
