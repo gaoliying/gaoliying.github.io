@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>ubuntu下安装nginx服务器 - 高立营</title>
+  <title>在nginx服务器上访问phpmyadmin - 高立营</title>
   <meta name="author" content="高立营">
 
   
-  <meta name="description" content="本文介绍如何在ubuntn系统下安装nginx服务器，并解决依赖关系">
-  <meta name="keywords" content="ubuntu, nginx, pcre, openssl">
+  <meta name="description" content="在nginx服务器上访问phpmyadmin">
+  <meta name="keywords" content="nginx, phpmyadmin, mysql, apache">
 
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://gaoliying.github.io/blog/2014/06/01/ubuntuxia-an-zhuang-nginxfu-wu-qi">
+  <link rel="canonical" href="http://gaoliying.github.io/blog/2014/06/03/zai-nginxfu-wu-qi-shang-fang-wen-phpmyadmin">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen-format.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/custom.css" media="screen, projection" rel="stylesheet" type="text/css">
@@ -72,7 +72,7 @@
   
   <header>
     
-      <h1 class="entry-title">ubuntu下安装nginx服务器</h1>
+      <h1 class="entry-title">在nginx服务器上访问phpmyadmin</h1>
     
     
       <p class="meta">
@@ -89,7 +89,7 @@
 
 
 
-<time datetime="2014-06-01T21:28:08+08:00" pubdate data-updated="true">2014/06/01 </time>
+<time datetime="2014-06-03T23:04:11+08:00" pubdate data-updated="true">2014/06/03 </time>
         
         
           | <a href="#comments">评论</a>
@@ -99,16 +99,53 @@
   </header>
 
 
-<div class="entry-content"><h3>nginx服务器简介</h3>
+<div class="entry-content"><h3>phpmyadmin</h3>
 
-<p>nginx,读音(&lsquo;engine x&rsquo;),是一款轻量级的http服务器／反向代理服务器，同时也是邮件(IMAP/POP3/SMTP)代理服务器。由俄罗斯程序工程师Igor Sysoev开发，以epoll和kqueue作为开发模型。其特点是占用内存少，高并发性能优异，能够支持高达50,000个并发连接数的响应。目前世界上大部分排名前1,000的网站采用nginx。</p>
+<p>phpmyadmin是由php脚本语言编写，作用是对mysql数据库进行可视化的管理。虽然我们可以通过系统命令行操作mysql，但命令行毕竟无法显示丰富的信息。在导入，导出大量数据的时候，phpmyadmin的优势就更明显。phpmyadmin通过网页的形式方便的实现了远程控制。</p>
 
 <!-- more -->
 
 
-<h3>安装nginx前的准备</h3>
+<p>以前我在用apache服务器的时候，只需要运行下面两个命令，phpmyadmin就已经和apache集成好了：</p>
 
-<p>为了确保在nginx中能够使用正则表达式进行更灵活的配置，安装nginx之前必须确定系统已经安装了PCRE(Perl Compatible Regular Expressions)包。也可以安装openssl。</p>
+<div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apt-get install lamp-server^
+</span><span class='line'>sudo apt-get install libapache2-mod-auth-mysql phpmyadmin
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+<p>但是现在在nginx下，事情似乎不是这么简单了，因为在nginx下跑php脚本必须有fast-cgi的支持。</p>
+
+<h3>安装＆配置</h3>
+
+<p>首先安装php：</p>
+
+<div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apt-get install php5-cli php5-cgi php5-fpm php5-mcrypt php5-mysql
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+<p>其中php5-fpm是fast-cgi进程管理器，安装好之后必须重启一下：</p>
+
+<div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>/etc/init.d/php5-fpm restart
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+<p>接着配置nginx，在/etc/nginx/conf.d目录下我已经创建了一个站点的配置文件site.conf，打开site.conf文件，添加index项，并添加对php文件的解析：</p>
 
 <div>
 
@@ -125,125 +162,25 @@
 <span class='line-number'>11</span>
 <span class='line-number'>12</span>
 <span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#切换到PCRE的保存路径，我把它保存在/usr/local/pcre路径下</span>
-</span><span class='line'>sudo mkdir /usr/local/pcre
-</span><span class='line'><span class="nb">cd</span> /usr/local/pcre
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>index index.php index.html index.htm;
 </span><span class='line'>
-</span><span class='line'><span class="c">#下载最新版的PCRE</span>
-</span><span class='line'>wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.33.tar.gz
-</span><span class='line'>
-</span><span class='line'><span class="c">#解压</span>
-</span><span class='line'>tar -zxvf pcre-8.33.tar.gz
-</span><span class='line'>
-</span><span class='line'><span class="c">#安装openssl</span>
-</span><span class='line'>sudo apt-get install openssl
-</span><span class='line'>sudo apt-get install libssl-dev
+</span><span class='line'>location ~ <span class="se">\.</span>php<span class="nv">$ </span><span class="o">{</span>
+</span><span class='line'>                fastcgi_split_path_info ^<span class="o">(</span>.+<span class="se">\.</span>php<span class="o">)(</span>/.+<span class="o">)</span><span class="nv">$;</span>
+</span><span class='line'>        <span class="c">#       # NOTE: You should have &quot;cgi.fix_pathinfo = 0;&quot; in php.ini</span>
+</span><span class='line'>        <span class="c">#</span>
+</span><span class='line'>        <span class="c">#       # With php5-cgi alone:</span>
+</span><span class='line'>                fastcgi_pass 127.0.0.1:9000;
+</span><span class='line'>        <span class="c">#       # With php5-fpm:</span>
+</span><span class='line'>        <span class="c">#       fastcgi_pass unix:/var/run/php5-fpm.sock;</span>
+</span><span class='line'>                fastcgi_index index.php;
+</span><span class='line'>                include fastcgi_params;
+</span><span class='line'>        <span class="o">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
 </div>
 
 
-<h3>安装nginx</h3>
-
-<div>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#切换到nginx保存路径</span>
-</span><span class='line'>mkdir /usr/local/www
-</span><span class='line'>mkdir /usr/local/www/nginx
-</span><span class='line'><span class="nb">cd</span> /usr/local/www/nginx
-</span><span class='line'>
-</span><span class='line'><span class="c">#下载稳定版nginx</span>
-</span><span class='line'>wget http://nginx.org/download/nginx-1.6.0.tar.gz
-</span><span class='line'>
-</span><span class='line'><span class="c">#解压</span>
-</span><span class='line'>tar -zxvf nginx-1.6.0.tar.gz
-</span><span class='line'>
-</span><span class='line'><span class="c">#配置</span>
-</span><span class='line'><span class="nb">cd </span>nginx-1.6.0
-</span><span class='line'>./configure --prefix<span class="o">=</span>/usr/local/www/nginx --with-pcre<span class="o">=</span>/usr/local/pcre/pcre-8.33 --with-http_stub_status_module --with-http_gzip_static_module
-</span><span class='line'>
-</span><span class='line'><span class="c">#编译</span>
-</span><span class='line'>make
-</span><span class='line'>make install
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-
-
-<p>安装完成后的提示信息：</p>
-
-<div>
-<img class="center" src="/images/2014-6/tishi.jpg" title="提示信息" >
-</div>
-
-
-<p>研究了一下nginx帮助后发现，有-s参数可对nginx服务进行管理：</p>
-
-<div>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>root@AY1405311210497418adZ:/usr/local/www/nginx# sbin/nginx -h
-</span><span class='line'>nginx version: nginx/1.6.0
-</span><span class='line'>Usage: nginx <span class="o">[</span>-?hvVtq<span class="o">]</span> <span class="o">[</span>-s signal<span class="o">]</span> <span class="o">[</span>-c filename<span class="o">]</span> <span class="o">[</span>-p prefix<span class="o">]</span> <span class="o">[</span>-g directives<span class="o">]</span>
-</span><span class='line'>
-</span><span class='line'>Options:
-</span><span class='line'>  -?,-h         : this <span class="nb">help</span>
-</span><span class='line'>  -v            : show version and <span class="nb">exit</span>
-</span><span class='line'>  -V            : show version and configure options <span class="k">then </span><span class="nb">exit</span>
-</span><span class='line'>  -t            : <span class="nb">test </span>configuration and <span class="nb">exit</span>
-</span><span class='line'>  -q            : suppress non-error messages during configuration testing
-</span><span class='line'>  -s signal     : send signal to a master process: stop, quit, reopen, reload
-</span><span class='line'>  -p prefix     : <span class="nb">set </span>prefix path <span class="o">(</span>default: /usr/local/www/nginx/<span class="o">)</span>
-</span><span class='line'>  -c filename   : <span class="nb">set </span>configuration file <span class="o">(</span>default: conf/nginx.conf<span class="o">)</span>
-</span><span class='line'>  -g directives : <span class="nb">set </span>global directives out of configuration file
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-
-
-<p>因此执行以下命令对nginx重启：</p>
-
-<div>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>root@AY1405311210497418adZ:/usr/local/www/nginx# sbin/nginx -s reload
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-
-
-
+<p>输入service nginx restart重启nginx。此时在浏览器中输入site/phpmyadmin应该能出现phpmyadmin首页，但在我这里失败了。后来我输入site/phpmyadmin/index.php竟然成功了。到目前为止我还不明白问题出在哪，今后只好每次都输入index.php后缀了。</p>
 </div>
 
 
@@ -267,7 +204,7 @@
 
 
 
-<time datetime="2014-06-01T21:28:08+08:00" pubdate data-updated="true">2014/06/01 </time>
+<time datetime="2014-06-03T23:04:11+08:00" pubdate data-updated="true">2014/06/03 </time>
       
 
 <span class="categories">
@@ -288,10 +225,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/05/19/decorator/" title="Previous Post: python中的装饰器(decorator)语法">&laquo; python中的装饰器(decorator)语法</a>
+        <a class="basic-alignment left" href="/blog/2014/06/03/zai-linuxshang-an-zhuang-ftpfu-wu-qi/" title="Previous Post: 在linux上安装ftp服务器">&laquo; 在linux上安装ftp服务器</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/06/02/gitguan-li-duo-ge-key/" title="Next Post: git管理多个key">git管理多个key &raquo;</a>
       
     </p>
     

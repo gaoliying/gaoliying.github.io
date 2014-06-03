@@ -4,7 +4,7 @@
   <title><![CDATA[高立营]]></title>
   <link href="http://gaoliying.github.io/atom.xml" rel="self"/>
   <link href="http://gaoliying.github.io/"/>
-  <updated>2014-06-03T17:36:14+08:00</updated>
+  <updated>2014-06-03T23:41:40+08:00</updated>
   <id>http://gaoliying.github.io/</id>
   <author>
     <name><![CDATA[高立营]]></name>
@@ -12,6 +12,96 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[在nginx服务器上访问phpmyadmin]]></title>
+    <link href="http://gaoliying.github.io/blog/2014/06/03/zai-nginxfu-wu-qi-shang-fang-wen-phpmyadmin/"/>
+    <updated>2014-06-03T23:04:11+08:00</updated>
+    <id>http://gaoliying.github.io/blog/2014/06/03/zai-nginxfu-wu-qi-shang-fang-wen-phpmyadmin</id>
+    <content type="html"><![CDATA[<h3>phpmyadmin</h3>
+
+<p>phpmyadmin是由php脚本语言编写，作用是对mysql数据库进行可视化的管理。虽然我们可以通过系统命令行操作mysql，但命令行毕竟无法显示丰富的信息。在导入，导出大量数据的时候，phpmyadmin的优势就更明显。phpmyadmin通过网页的形式方便的实现了远程控制。</p>
+
+<!-- more -->
+
+
+<p>以前我在用apache服务器的时候，只需要运行下面两个命令，phpmyadmin就已经和apache集成好了：</p>
+
+<div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apt-get install lamp-server^
+</span><span class='line'>sudo apt-get install libapache2-mod-auth-mysql phpmyadmin
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+<p>但是现在在nginx下，事情似乎不是这么简单了，因为在nginx下跑php脚本必须有fast-cgi的支持。</p>
+
+<h3>安装＆配置</h3>
+
+<p>首先安装php：</p>
+
+<div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apt-get install php5-cli php5-cgi php5-fpm php5-mcrypt php5-mysql
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+<p>其中php5-fpm是fast-cgi进程管理器，安装好之后必须重启一下：</p>
+
+<div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>/etc/init.d/php5-fpm restart
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+<p>接着配置nginx，在/etc/nginx/conf.d目录下我已经创建了一个站点的配置文件site.conf，打开site.conf文件，添加index项，并添加对php文件的解析：</p>
+
+<div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>index index.php index.html index.htm;
+</span><span class='line'>
+</span><span class='line'>location ~ <span class="se">\.</span>php<span class="nv">$ </span><span class="o">{</span>
+</span><span class='line'>                fastcgi_split_path_info ^<span class="o">(</span>.+<span class="se">\.</span>php<span class="o">)(</span>/.+<span class="o">)</span><span class="nv">$;</span>
+</span><span class='line'>        <span class="c">#       # NOTE: You should have &quot;cgi.fix_pathinfo = 0;&quot; in php.ini</span>
+</span><span class='line'>        <span class="c">#</span>
+</span><span class='line'>        <span class="c">#       # With php5-cgi alone:</span>
+</span><span class='line'>                fastcgi_pass 127.0.0.1:9000;
+</span><span class='line'>        <span class="c">#       # With php5-fpm:</span>
+</span><span class='line'>        <span class="c">#       fastcgi_pass unix:/var/run/php5-fpm.sock;</span>
+</span><span class='line'>                fastcgi_index index.php;
+</span><span class='line'>                include fastcgi_params;
+</span><span class='line'>        <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+<p>输入service nginx restart重启nginx。此时在浏览器中输入site/phpmyadmin应该能出现phpmyadmin首页，但在我这里失败了。后来我输入site/phpmyadmin/index.php竟然成功了。到目前为止我还不明白问题出在哪，今后只好每次都输入index.php后缀了。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[在linux上安装ftp服务器]]></title>
