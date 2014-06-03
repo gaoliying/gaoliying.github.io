@@ -228,7 +228,9 @@
 </div>
 
 
-<p>但是处于安全方面的考虑，不建议启动匿名访问，尤其是匿名用户的上传权限。你总不希望随便某个人都可以将他的文件上传到你的服务器上吧。于是我是关闭了匿名访问。</p>
+<p>tips:每次修改了配置文件后记得执行service vsftpd restart使修改后的配置文件生效。</p>
+
+<p>但是出于安全方面的考虑，不建议启动匿名访问，尤其是匿名用户的上传权限。你总不希望随便某个人都可以将他的文件上传到你的服务器上吧。于是我是关闭了匿名访问。</p>
 
 <h3>设置登录用户</h3>
 
@@ -274,7 +276,7 @@
 </span><span class='line'>sudo vi /etc/vsftpd.chroot_list
 </span><span class='line'>ftpuser
 </span><span class='line'>
-</span><span class='line'><span class="c">#启动发图片服务器</span>
+</span><span class='line'><span class="c">#启动ftp服务器</span>
 </span><span class='line'>service vsftpd start
 </span></code></pre></td></tr></table></div></figure>
 
