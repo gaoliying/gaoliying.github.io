@@ -71,7 +71,7 @@ a {
 	//background:#252525 url('/images/line-tile.png?1399513803') top left
 }*/
 body>div {
-	background:rgba(100,100,100,0.6) url('/images/noise.png?1399513803') top left;
+	background:rgba(34,34,34,0.5) url('/images/noise.png?1399513803') top left;
 	/*border-bottom:1px solid #bfbfbf;  modified by gly @2014.5.9  */
 }
 body>div>div {
@@ -102,7 +102,7 @@ body>header h2 {
 }
 body {
 	line-height:1.5em;
-	color:#eee;
+	color:#d3d3d3;
 }
 h1 {
 	font-size:2.2em;
@@ -125,7 +125,8 @@ h2,section h1 {
 	font-size:1.5em
 }
 h3,section h2,section section h1 {
-	font-size:1.3em
+	font-size:1.3em;
+    color: white;
 }
 h4,section h3,section section h2,section section section h1 {
 	font-size:1em
@@ -590,7 +591,7 @@ aside.sidebar {
 }
 }@media only screen and (min-width:768px) {
 	ul,ol {
-	margin-left:0
+	margin-left:40px;
 }
 }body>header {
 	/*background:#222*/
@@ -869,7 +870,8 @@ article header {
 	base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAABCAYAAACsXeyTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAFUlEQVQIHWNIS0sr/v//PwMMDzY+ADqMahlW4J91AAAAAElFTkSuQmCC') bottom left repeat-x
 }
 article header h1 {
-	margin:0
+	margin:0;
+    color: white;
 }
 article header h1 a {
 	text-decoration:none
@@ -927,7 +929,8 @@ article img,article video,article .flash-video {
 	-webkit-box-sizing:border-box;
 	-moz-box-sizing:border-box;
 	box-sizing:border-box;
-	border:#fff 0.5em solid
+	/*border:#fff 0.5em solid*/
+    background-color: white;
 }
 article video,article .flash-video {
 	margin:0 auto 1.5em

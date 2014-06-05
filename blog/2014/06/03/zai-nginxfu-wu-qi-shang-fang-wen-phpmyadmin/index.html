@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>我的第一篇markdown文章 - 高立营</title>
+  <title>在nginx服务器上访问phpmyadmin - 高立营</title>
   <meta name="author" content="高立营">
 
   
-  <meta name="description" content="jekyll,octopress,markdown">
-  <meta name="keywords" content="jekyll,octopress,markdown">
+  <meta name="description" content="在nginx服务器上访问phpmyadmin">
+  <meta name="keywords" content="nginx, phpmyadmin, mysql, apache">
 
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://gaoliying.github.io/blog/2014/05/08/first-acticle-in-octopress">
+  <link rel="canonical" href="http://gaoliying.github.io/blog/2014/06/03/zai-nginxfu-wu-qi-shang-fang-wen-phpmyadmin">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen-format.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/custom.css" media="screen, projection" rel="stylesheet" type="text/css">
@@ -72,7 +72,7 @@
   
   <header>
     
-      <h1 class="entry-title">我的第一篇markdown文章</h1>
+      <h1 class="entry-title">在nginx服务器上访问phpmyadmin</h1>
     
     
       <p class="meta">
@@ -89,7 +89,7 @@
 
 
 
-<time datetime="2014-05-08T09:57:37+08:00" pubdate data-updated="true">2014/05/08 </time>
+<time datetime="2014-06-03T23:04:11+08:00" pubdate data-updated="true">2014/06/03 </time>
         
         
           | <a href="#comments">评论</a>
@@ -99,26 +99,92 @@
   </header>
 
 
-<div class="entry-content"><p><em>这是我的第一篇测试文章，求给力。</em></p>
+<div class="entry-content"><h3>phpmyadmin</h3>
 
-<h3>我的第一个个人博客</h3>
+<p>phpmyadmin是由php脚本语言编写，作用是对mysql数据库进行可视化的管理。虽然我们可以通过系统命令行操作mysql，但命令行毕竟无法显示丰富的信息。在导入，导出大量数据的时候，phpmyadmin的优势就更明显。phpmyadmin通过网页的形式方便的实现了远程控制。</p>
 
-<p>蛮久之前，我就想搭建一个自己的技术博客，由于当时水平有限，所以这个想法就搁浅了。到目前为止，我已经基本掌握了前端的知识，是时候实现当初那个想法了。对于我这种对后台开发还不是很了解的情况下，Github Pages无疑是最优选择。之后我就开始学习jekyll以及octopress框架。到现在，我终于在本地和github上搭建好了octopress环境，也知道怎么部署了，很兴奋。</p>
-
-<!--more-->
+<!-- more -->
 
 
-<p>jekyll和octopress的学习过程颇费周折，最终依靠官方文档和搜索引擎，问题都一一解决了。以下是官方文档：</p>
+<p>以前我在用apache服务器的时候，只需要运行下面两个命令，phpmyadmin就已经和apache集成好了：</p>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<em> <a href="http://jekyllrb.com/docs/home/" title="jekyll">jekyll</a>
-&nbsp;&nbsp;&nbsp;&nbsp;</em> <a href="http://octopress.org/" title="octopress">octopress</a></p>
+<div>
 
-<p>现在我感觉我最迫切的任务是赶紧熟悉octopress框架和掌握markdown标记语言。octopress的默认主题我觉得不够优雅，之后我会下载一些主题，或许条件允许的话我会自己customize。markdown语言比较简单，附上学习地址：</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apt-get install lamp-server^
+</span><span class='line'>sudo apt-get install libapache2-mod-auth-mysql phpmyadmin
+</span></code></pre></td></tr></table></div></figure>
 
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<em> <a href="http://wowubuntu.com/markdown/">markdown语法说明</a>
-&nbsp;&nbsp;&nbsp;&nbsp;</em> <a href="http://jianshu.io/p/q81RER">献给写作者的markdown新手指南</a></p>
+</div>
 
-<p>今天晚些时候我打算翻译一篇技术文章，Let&rsquo;s move!!!</p>
+
+<p>但是现在在nginx下，事情似乎不是这么简单了，因为在nginx下跑php脚本必须有fast-cgi的支持。</p>
+
+<h3>安装＆配置</h3>
+
+<p>首先安装php：</p>
+
+<div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apt-get install php5-cli php5-cgi php5-fpm php5-mcrypt php5-mysql
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+<p>其中php5-fpm是fast-cgi进程管理器，安装好之后必须重启一下：</p>
+
+<div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>/etc/init.d/php5-fpm restart
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+<p>接着配置nginx，在/etc/nginx/conf.d目录下我已经创建了一个站点的配置文件site.conf，打开site.conf文件，添加index项，并添加对php文件的解析：</p>
+
+<div>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>index index.php index.html index.htm;
+</span><span class='line'>
+</span><span class='line'>location ~ <span class="se">\.</span>php<span class="nv">$ </span><span class="o">{</span>
+</span><span class='line'>                fastcgi_split_path_info ^<span class="o">(</span>.+<span class="se">\.</span>php<span class="o">)(</span>/.+<span class="o">)</span><span class="nv">$;</span>
+</span><span class='line'>        <span class="c">#       # NOTE: You should have &quot;cgi.fix_pathinfo = 0;&quot; in php.ini</span>
+</span><span class='line'>        <span class="c">#</span>
+</span><span class='line'>        <span class="c">#       # With php5-cgi alone:</span>
+</span><span class='line'>                fastcgi_pass 127.0.0.1:9000;
+</span><span class='line'>        <span class="c">#       # With php5-fpm:</span>
+</span><span class='line'>        <span class="c">#       fastcgi_pass unix:/var/run/php5-fpm.sock;</span>
+</span><span class='line'>                fastcgi_index index.php;
+</span><span class='line'>                include fastcgi_params;
+</span><span class='line'>        <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+<p>建立连接：ln -s /usr/share/phpmyadmin /var/www/phpmyadmin</p>
+
+<p>输入service nginx restart重启nginx。此时在浏览器中输入site/phpmyadmin应该能出现phpmyadmin首页，但在我这里失败了。后来我输入site/phpmyadmin/index.php竟然成功了。到目前为止我还不明白问题出在哪，今后只好每次都输入index.php后缀了。</p>
+
+<p>参考博文：<a href="http://hi.baidu.com/sudoer/item/479347788e7364376e29f6f8">http://hi.baidu.com/sudoer/item/479347788e7364376e29f6f8</a></p>
 </div>
 
 
@@ -142,12 +208,12 @@
 
 
 
-<time datetime="2014-05-08T09:57:37+08:00" pubdate data-updated="true">2014/05/08 </time>
+<time datetime="2014-06-03T23:04:11+08:00" pubdate data-updated="true">2014/06/03 </time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/sui-bi/'>随笔</a>
+    <a class='category' href='/blog/categories/backend/'>backend</a>
   
 </span>
 
@@ -163,8 +229,8 @@
     
     <p class="meta">
       
+        <a class="basic-alignment left" href="/blog/2014/06/03/zai-linuxshang-an-zhuang-ftpfu-wu-qi/" title="Previous Post: 在linux上安装ftp服务器">&laquo; 在linux上安装ftp服务器</a>
       
-        <a class="basic-alignment right" href="/blog/2014/05/10/the-entire-blog-is-almost-done/" title="Next Post: 博客样式初步确定">博客样式初步确定 &raquo;</a>
       
     </p>
     
