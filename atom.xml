@@ -4,7 +4,7 @@
   <title><![CDATA[高立营]]></title>
   <link href="http://gaoliying.github.io/atom.xml" rel="self"/>
   <link href="http://gaoliying.github.io/"/>
-  <updated>2014-06-05T09:35:30+08:00</updated>
+  <updated>2014-06-05T09:46:11+08:00</updated>
   <id>http://gaoliying.github.io/</id>
   <author>
     <name><![CDATA[高立营]]></name>
@@ -99,7 +99,7 @@
 </div>
 
 
-<p>建立连接：ln -s /usr/share/phpmyadmin /var/www/phpmyadmin</p>
+<p>建立连接：ln -s /usr/share/phpmyadmin /var/www/site/phpmyadmin</p>
 
 <p>输入service nginx restart重启nginx。此时在浏览器中输入site/phpmyadmin应该能出现phpmyadmin首页，但在我这里失败了。后来我输入site/phpmyadmin/index.php竟然成功了。到目前为止我还不明白问题出在哪，今后只好每次都输入index.php后缀了。</p>
 
