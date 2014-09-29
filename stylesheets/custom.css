@@ -39,16 +39,16 @@ ul.main-navigation li a:hover{
 	color:#8AA6AD;
 }
 
-@font-face {
-  font-family: 'lixia';
-  src: url('/fonts/lixia.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
+/*@font-face {
+  //font-family: 'lixia';
+  //src: url('/fonts/lixia.ttf') format('truetype');
+  //font-weight: normal;
+  //font-style: normal;
+//}
 
-body>header h1 a{
-	font-family: lixia;
-}
+//body>header h1 a{
+//	font-family: lixia;
+//}/*
 
 /*aside.sidebar section ul li::before{*/
 	/*content:"* ";*/

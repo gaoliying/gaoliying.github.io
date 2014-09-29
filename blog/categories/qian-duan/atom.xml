@@ -1,0 +1,706 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: 前端 | 高立营]]></title>
+  <link href="http://gaoliying.github.io/blog/categories/qian-duan/atom.xml" rel="self"/>
+  <link href="http://gaoliying.github.io/"/>
+  <updated>2014-09-29T21:07:43+08:00</updated>
+  <id>http://gaoliying.github.io/</id>
+  <author>
+    <name><![CDATA[高立营]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[JavaScript中的命名空间和模块]]></title>
+    <link href="http://gaoliying.github.io/blog/2014/09/29/javascript-zhong-de-ming-ming-kong-jian-he-mo-kuai/"/>
+    <updated>2014-09-29T19:40:57+08:00</updated>
+    <id>http://gaoliying.github.io/blog/2014/09/29/javascript-zhong-de-ming-ming-kong-jian-he-mo-kuai</id>
+    <content type="html"><![CDATA[<h3>命名空间</h3>
+
+<p>我们知道在大多数编程语言里有命名空间（或包）的概念。命名空间允许我们将代码封装起来以避免命名冲突。</p>
+
+<p>举个例子，在c#中你可能见到过这样的声明：</p>
+
+<div>
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">namespace</span> <span class="nn">MyNameSpace</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">class</span> <span class="nc">MyClass</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+</div>
+
+
+
+
+<!-- more -->
+
+
+<p>如果你想使用MyClass这个类，你必须显式地声明这个类在哪个命名空间中：</p>
+
+<div>
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="n">MyNamespace</span><span class="p">.</span><span class="n">MyClass</span> <span class="n">obj</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+</div>
+
+
+<p>但很遗憾的是，在Javascript中不存在命名空间的概念。更糟糕的是在Javascript中你创建的所有变量都是默认为全局变量。现在如何避免命名冲突显然成为这种缺陷的补救方式，尤其在现代应用中你很可能使用了第三方插件。</p>
+
+<p>让我们先来看看反面例子，在这个例子中你把所有方法和变量都声明为全局的：</p>
+
+<div>
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">calculateVat</span><span class="p">(</span><span class="nx">prod</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'><span class="err">    </span><span class="k">return</span> <span class="nx">prod</span><span class="p">.</span><span class="nx">price</span> <span class="o">*</span> <span class="mf">1.21</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="err"> </span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">product</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">price</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'><span class="err">    </span><span class="k">this</span><span class="p">.</span><span class="nx">price</span> <span class="o">=</span> <span class="nx">price</span><span class="p">;</span>
+</span><span class='line'><span class="err">    </span><span class="k">this</span><span class="p">.</span><span class="nx">getPrice</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'><span class="err">                       </span><span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">price</span><span class="p">;</span>
+</span><span class='line'><span class="err">        </span><span class="p">};</span>
+</span><span class='line'><span class="err">    </span><span class="p">};</span>
+</span><span class='line'><span class="err"> </span>
+</span><span class='line'><span class="kd">function</span> <span class="nx">doCalculations</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'><span class="err">    </span><span class="kd">var</span> <span class="nx">p</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">product</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+</span><span class='line'><span class="err">    </span><span class="nx">alert</span><span class="p">(</span><span class="nx">calculateVat</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">getPrice</span><span class="p">()));</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+</div>
+
+
+<p>这是一个简单的代码片段，但是代码里已经有3个全局变量了：calculateVat，product，doCalculations。如果现在开始使用第三方库的话我们会遇到麻烦。如果第三发库中也使用了相同的变量名会出现什么情况？如果它们是在我们的脚本之后添加进来的，它们会覆盖我们的变量和方法。如果它们是在我们的脚本之前添加进来的，我们会覆盖它们，这些库可能无法使用。这两种情况都很糟糕。</p>
+
+<h3>如何在Javascript中创建命名空间</h3>
+
+<p>为了解决这个问题你可以创建一个简单的全局对象，然后把所有的方法和变量都设置成这个对象的属性：</p>
+
+<div>
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">MYAPPLICATION</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'><span class="err">    </span><span class="nx">calculateVat</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">base</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'><span class="err">        </span><span class="k">return</span> <span class="nx">base</span> <span class="o">*</span> <span class="mf">1.21</span><span class="p">;</span>
+</span><span class='line'><span class="err">    </span><span class="p">},</span>
+</span><span class='line'><span class="err">    </span><span class="nx">product</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">price</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'><span class="err">        </span><span class="k">this</span><span class="p">.</span><span class="nx">price</span> <span class="o">=</span> <span class="nx">price</span><span class="p">;</span>
+</span><span class='line'><span class="err">        </span><span class="k">this</span><span class="p">.</span><span class="nx">getPrice</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'><span class="err">                          </span><span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">price</span><span class="p">;</span>
+</span><span class='line'><span class="err">                       </span><span class="p">};</span>
+</span><span class='line'><span class="err">    </span><span class="p">},</span>
+</span><span class='line'><span class="err">    </span><span class="nx">doCalculations</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'><span class="err">        </span><span class="kd">var</span> <span class="nx">p</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MYAPPLICATION</span><span class="p">.</span><span class="nx">product</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+</span><span class='line'><span class="err">        </span><span class="nx">alert</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">calculateVat</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">getPrice</span><span class="p">()));</span>
+</span><span class='line'><span class="err">    </span><span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+</div>
+
+
+<p>现在我们只有一个全局变量（MYAPPLICATION）。虽然这并不是真正的命名空间，但是还可以凑合着用。因为你必须通过MYAPPLICATION这个对象才能调用里面的变量：</p>
+
+<div>
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">p</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MYAPPLICATION</span><span class="p">.</span><span class="nx">product</span><span class="p">(</span><span class="mi">150</span><span class="p">);</span>
+</span><span class='line'><span class="nx">alert</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">getPrice</span><span class="p">());</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+</div>
+
+
+<h3>嵌套的命名空间</h3>
+
+<p>在大多数编程语言里，你可以再一个命名空间里创建另一个命名空间。这是为了更好的模块化。我们可以应用这种模式然后在外层对象中定义另一个对象：</p>
+
+<div>
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">MYAPPLICATION</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'><span class="err">    </span><span class="nx">MODEL</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'><span class="err">        </span><span class="nx">product</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">price</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'><span class="err">                     </span><span class="k">this</span><span class="p">.</span><span class="nx">price</span> <span class="o">=</span> <span class="nx">price</span><span class="p">;</span>
+</span><span class='line'><span class="err">                    </span><span class="k">this</span><span class="p">.</span><span class="nx">getPrice</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'><span class="err">                         </span><span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">price</span><span class="p">;</span>
+</span><span class='line'><span class="err">                     </span><span class="p">};</span>
+</span><span class='line'><span class="err">                 </span><span class="p">}</span>
+</span><span class='line'><span class="err">    </span><span class="p">},</span>
+</span><span class='line'><span class="err">    </span><span class="nx">LOGIC</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'><span class="err">        </span><span class="nx">calculateVat</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">base</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'><span class="err">            </span><span class="k">return</span> <span class="nx">base</span> <span class="o">*</span> <span class="mf">1.21</span><span class="p">;</span>
+</span><span class='line'><span class="err">        </span><span class="p">},</span>
+</span><span class='line'><span class="err">        </span><span class="nx">doCalculations</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'><span class="err">            </span><span class="kd">var</span> <span class="nx">p</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MYAPPLICATION</span><span class="p">.</span><span class="nx">MODEL</span><span class="p">.</span><span class="nx">product</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+</span><span class='line'><span class="err">            </span><span class="nx">alert</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">calculateVat</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">getPrice</span><span class="p">()));</span>
+</span><span class='line'><span class="err">        </span><span class="p">}</span>
+</span><span class='line'><span class="err">    </span><span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+</div>
+
+
+<p>这种模式相对来说比较简单，是一种避免和其他库（或者你自己的代码）发生命名冲突的好方法。</p>
+
+<h3>安全地创建命名空间</h3>
+
+<p>因为我们仍然有一个全局对象，仍然还有可能覆盖其他同名的全局对象。所以我们要安全地创建命名空间：</p>
+
+<div>
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">//不安全，如果存在其他同名的对象，我们就会覆盖它</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">MYAPPLICATION</span> <span class="o">=</span> <span class="p">{};</span>
+</span><span class='line'><span class="err"> </span>
+</span><span class='line'><span class="c1">//在创建命名空间之前我们必须检查一下</span>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">MYAPPLICATION</span> <span class="o">===</span> <span class="s2">&quot;undefined&quot;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'><span class="err">    </span><span class="kd">var</span> <span class="nx">MYAPPLICATION</span> <span class="o">=</span> <span class="p">{};</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="err"> </span>
+</span><span class='line'><span class="c1">// 或者使用简化版本</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">MAYAPPLICATION</span> <span class="o">=</span> <span class="nx">MYAPPLICATION</span> <span class="o">||</span> <span class="p">{};</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+</div>
+
+
+<p>从这个例子中你可以看出，如果我们想要安全地创建命名空间是有点棘手而且需要一些模板代码的，如果我们可以避免所有这些是不是很棒呢？</p>
+
+<h3>创建多功能的命名空间方法</h3>
+
+<p>我们想要做的仅仅是安全地调用一个创建命名空间的方法，然后我们在这个命名空间中定义方法和变量。这是Javascript动态性的很好表现：</p>
+
+<div>
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">MAYAPPLICATION</span> <span class="o">=</span> <span class="nx">MYAPPLICATION</span> <span class="o">||</span> <span class="p">{};</span>
+</span><span class='line'><span class="err"> </span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">ns</span> <span class="o">=</span> <span class="nx">MYAPPLICATION</span><span class="p">.</span><span class="nx">createNS</span><span class="p">(</span><span class="s2">&quot;MYAPPLICATION.MODEL.PRODUCTS&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="err"> </span>
+</span><span class='line'><span class="nx">ns</span><span class="p">.</span><span class="nx">product</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">price</span><span class="p">){</span>
+</span><span class='line'><span class="err">   </span><span class="k">this</span><span class="p">.</span><span class="nx">price</span> <span class="o">=</span> <span class="nx">price</span><span class="p">;</span>
+</span><span class='line'><span class="err">   </span><span class="k">this</span><span class="p">.</span><span class="nx">getPrice</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'><span class="err">    </span><span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">price</span><span class="p">;</span>
+</span><span class='line'><span class="err">   </span><span class="p">}</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+</div>
+
+
+<p>我们仍然需要检查一下全局命名空间，但是这可以让我们用一行代码创建命名空间的层级。</p>
+
+<p>怎么实现？让我们来看一看createNS的实现：</p>
+
+<div>
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">MYAPPLICATION</span><span class="p">.</span><span class="nx">createNS</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">namespace</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'><span class="err">    </span><span class="kd">var</span> <span class="nx">nsparts</span> <span class="o">=</span> <span class="nx">namespace</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="err">    </span><span class="kd">var</span> <span class="nx">parent</span> <span class="o">=</span> <span class="nx">MYAPPLICATION</span><span class="p">;</span>
+</span><span class='line'><span class="err"> </span>
+</span><span class='line'><span class="c1">// 我们想包括或排除根命名空间所以我们把它删除</span>
+</span><span class='line'><span class="err">    </span><span class="k">if</span> <span class="p">(</span><span class="nx">nsparts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">===</span> <span class="s2">&quot;MYAPPLICATION&quot;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'><span class="err">        </span><span class="nx">nsparts</span> <span class="o">=</span> <span class="nx">nsparts</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span><span class='line'><span class="err">    </span><span class="p">}</span>
+</span><span class='line'><span class="err"> </span>
+</span><span class='line'><span class="c1">// 遍历parts ，如果可能就创建一个嵌套的命名空间</span>
+</span><span class='line'><span class="err">    </span><span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">nsparts</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'><span class="err">        </span><span class="kd">var</span> <span class="nx">partname</span> <span class="o">=</span> <span class="nx">nsparts</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+</span><span class='line'><span class="c1">// 检查当前的parent是否已经声明了这个namespace</span>
+</span><span class='line'><span class="c1">// 如果没有就创建之</span>
+</span><span class='line'><span class="err">        </span><span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">parent</span><span class="p">[</span><span class="nx">partname</span><span class="p">]</span> <span class="o">===</span> <span class="s2">&quot;undefined&quot;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'><span class="err">            </span><span class="nx">parent</span><span class="p">[</span><span class="nx">partname</span><span class="p">]</span> <span class="o">=</span> <span class="p">{};</span>
+</span><span class='line'><span class="err">        </span><span class="p">}</span>
+</span><span class='line'><span class="c1">// 获得一个在目前层级里最深的元素</span>
+</span><span class='line'><span class="err">        </span><span class="nx">parent</span> <span class="o">=</span> <span class="nx">parent</span><span class="p">[</span><span class="nx">partname</span><span class="p">];</span>
+</span><span class='line'><span class="err">    </span><span class="p">}</span>
+</span><span class='line'><span class="c1">// 现在的parent是由空的命名空间组成的，我们返回最外层的命名空间</span>
+</span><span class='line'><span class="err">    </span><span class="k">return</span> <span class="nx">parent</span><span class="p">;</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+</div>
+
+
+<p>上面的函数将传入的字符串分割然后为每个部分创建一个嵌套的命名空间。这意味着代码：</p>
+
+<div>
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">MYAPPLICATION</span><span class="p">.</span><span class="nx">createNS</span><span class="p">(</span><span class="s2">&quot;MYAPPLICATION.MODEL.PRODUCTS&quot;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+</div>
+
+
+<p>从本质上和下面的声明是一样的：</p>
+
+<div>
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">MYAPPLICATION</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'><span class="err">    </span><span class="nx">MODEL</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'><span class="err">        </span><span class="nx">PRODUCTS</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'><span class="err">        </span><span class="p">}</span>
+</span><span class='line'><span class="err">    </span><span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+</div>
+
+
+<h3>别名命名空间</h3>
+
+<p>当你的命名空间的层次变得越来越深的时候，你会发现这会变得很麻烦因为你总是不得不键入一个函数或一个变量的完整引用。给命名空间取别名可以很容易解决这个问题(就像c#里使用using 声明以及java和vb里使用Import一样)。代码如下：</p>
+
+<div>
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">MYAPPLICATION</span><span class="p">.</span><span class="nx">createNS</span><span class="p">(</span><span class="s2">&quot;MYAPPLICATION.MODEL.PRODUCTS&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="nx">MYAPPLICATION</span><span class="p">.</span><span class="nx">createNS</span><span class="p">(</span><span class="s2">&quot;MYAPPLICATION.LOGIC.BUSINESS&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="err"> </span>
+</span><span class='line'><span class="nx">MYAPPLICATION</span><span class="p">.</span><span class="nx">MODEL</span><span class="p">.</span><span class="nx">PRODUCTS</span><span class="p">.</span><span class="nx">product</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">price</span><span class="p">){</span><span class="err">                                          </span>
+</span><span class='line'><span class="err">    </span><span class="k">this</span><span class="p">.</span><span class="nx">price</span> <span class="o">=</span> <span class="nx">price</span><span class="p">;</span><span class="err">   </span>
+</span><span class='line'><span class="err">    </span><span class="k">this</span><span class="p">.</span><span class="nx">isVatApplicable</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</span><span class='line'><span class="err">    </span><span class="k">this</span><span class="p">.</span><span class="nx">getPrice</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span><span class="err">                                              </span>
+</span><span class='line'><span class="err">        </span><span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">price</span><span class="p">;</span><span class="err">                                           </span>
+</span><span class='line'><span class="err">    </span><span class="p">}</span><span class="err">                                      </span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'><span class="err"> </span>
+</span><span class='line'><span class="nx">MYAPPLICATION</span><span class="p">.</span><span class="nx">MODEL</span><span class="p">.</span><span class="nx">PRODUCTS</span><span class="p">.</span><span class="nx">currentvatrate</span> <span class="o">=</span> <span class="mf">1.21</span><span class="p">;</span>
+</span><span class='line'><span class="err"> </span>
+</span><span class='line'><span class="nx">MYAPPLICATION</span><span class="p">.</span><span class="nx">LOGIC</span><span class="p">.</span><span class="nx">BUSINESS</span><span class="p">.</span><span class="nx">getSelectedProductTotal</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'><span class="err">    </span><span class="kd">var</span> <span class="nx">p</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MYAPPLICATION</span><span class="p">.</span><span class="nx">MODEL</span><span class="p">.</span><span class="nx">PRODUCTS</span><span class="p">.</span><span class="nx">product</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+</span><span class='line'><span class="err">    </span><span class="k">if</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">isVatApplicable</span><span class="p">){</span>
+</span><span class='line'><span class="err">        </span><span class="k">return</span> <span class="nx">p</span><span class="p">.</span><span class="nx">getPrice</span><span class="p">()</span> <span class="o">*</span> <span class="nx">MYAPPLICATION</span><span class="p">.</span><span class="nx">MODEL</span><span class="p">.</span><span class="nx">PRODUCTS</span><span class="p">.</span><span class="nx">currentvatrate</span><span class="p">;</span>
+</span><span class='line'><span class="err">    </span><span class="p">}</span>
+</span><span class='line'><span class="err">    </span><span class="k">else</span> <span class="p">{</span>
+</span><span class='line'><span class="err">        </span><span class="k">return</span> <span class="nx">p</span><span class="p">.</span><span class="nx">getPrice</span><span class="p">();</span>
+</span><span class='line'><span class="err">    </span><span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+</div>
+
+
+<p>上面这个简单的代码声明两个命名空间然后增加一个对象到第一个，增加一个函数到第二个。这个函数使用在其他命名空间里的对象。很明显，这个简单的仅仅使用了一个函数和一些变量的方法写起来很麻烦，因为要引用很多前缀。</p>
+
+<p>我们可以通过给命名空间取一个局部变量的别名来简化：</p>
+
+<div>
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">MYAPPLICATION</span><span class="p">.</span><span class="nx">LOGIC</span><span class="p">.</span><span class="nx">BUSINESS</span><span class="p">.</span><span class="nx">getSelectedProductTotal</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'><span class="err">    </span><span class="kd">var</span> <span class="nx">model</span> <span class="o">=</span> <span class="nx">MYAPPLICATION</span><span class="p">.</span><span class="nx">MODEL</span><span class="p">.</span><span class="nx">PRODUCTS</span><span class="p">;</span>
+</span><span class='line'><span class="err">    </span><span class="kd">var</span> <span class="nx">p</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">model</span><span class="p">.</span><span class="nx">product</span><span class="p">(</span><span class="mi">150</span><span class="p">);</span>
+</span><span class='line'><span class="err">    </span><span class="k">if</span> <span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">isVatApplicable</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'><span class="err">        </span><span class="k">return</span> <span class="nx">p</span><span class="p">.</span><span class="nx">getPrice</span><span class="p">()</span> <span class="o">*</span> <span class="nx">model</span><span class="p">.</span><span class="nx">currentvatrate</span><span class="p">;</span>
+</span><span class='line'><span class="err">    </span><span class="p">}</span>
+</span><span class='line'><span class="err">    </span><span class="k">else</span> <span class="p">{</span>
+</span><span class='line'><span class="err">        </span><span class="k">return</span> <span class="nx">p</span><span class="p">.</span><span class="nx">getPrice</span><span class="p">();</span>
+</span><span class='line'><span class="err">    </span><span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+</div>
+
+
+<p>除了可以减轻你的打字工作量和减少代码量之外，这种模式还有一个我认为非常重要的好处。既然你在每个函数的顶部声明命名空间，你显式地在你的代码中阐明了依赖的模块。这将帮你更好地写代码。</p>
+
+<h3>缺点</h3>
+
+<p>虽然这种模式使用起来简单并且对很多任务和场景都有效，但是这种模式有一个大缺点：</p>
+
+<p>那个全局实例是很脆弱的。这意味着任何人都可以访问它的内部变量。举个栗子，product有price属性和getPrice() 方法。然而没什么东西可以阻止我们直接访问price属性。这不是我们想要的，我们只想将方法暴露出去这样我们就可以控制对私有属性的访问。</p>
+
+<p>要解决这个问题我们必须看看如何创建封装特定数据域和行为的模块。</p>
+
+<h3>模块</h3>
+
+<h3>私有成员</h3>
+
+<p>因为JavaScript中没有作用域语法，我们必须用闭包来实现私有成员。</p>
+
+<div>
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">MYAPPLICATION</span><span class="p">.</span><span class="nx">MODEL</span><span class="p">.</span><span class="nx">PRODUCTS</span><span class="p">.</span><span class="nx">product</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">price</span><span class="p">){</span>
+</span><span class='line'><span class="err">    </span><span class="kd">var</span> <span class="nx">price</span> <span class="o">=</span> <span class="nx">price</span><span class="p">;</span><span class="err">   </span>
+</span><span class='line'><span class="err">     </span>
+</span><span class='line'><span class="err">    </span><span class="k">return</span> <span class="p">{</span>
+</span><span class='line'><span class="err">        </span><span class="nx">isVatApplicable</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+</span><span class='line'><span class="err">        </span><span class="nx">getPrice</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span><span class="err">                                              </span>
+</span><span class='line'><span class="err">            </span><span class="k">return</span> <span class="nx">price</span><span class="p">;</span><span class="err">                                           </span>
+</span><span class='line'><span class="err">        </span><span class="p">}</span>
+</span><span class='line'><span class="err">    </span><span class="p">};</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+</div>
+
+
+<p>在这个代码中，price变量时私有的，但是对于product方法来说是可访问的因为它在这个方法内。公有成员是isVatApplication和getPrice.</p>
+
+<p>另一种模式是revealing module。它和前面一种模式本质上是一样的。但是现在我们把所有东西都声明成私有的：</p>
+
+<div>
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">MYAPPLICATION</span><span class="p">.</span><span class="nx">MODEL</span><span class="p">.</span><span class="nx">PRODUCTS</span><span class="p">.</span><span class="nx">product</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">price</span><span class="p">){</span>
+</span><span class='line'><span class="err">    </span><span class="kd">var</span> <span class="nx">price</span> <span class="o">=</span> <span class="nx">price</span><span class="p">;</span><span class="err">   </span>
+</span><span class='line'><span class="err">    </span><span class="kd">var</span> <span class="nx">isVatApplicable</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</span><span class='line'><span class="err">    </span><span class="kd">var</span> <span class="nx">getPrice</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span><span class="err">                                              </span>
+</span><span class='line'><span class="err">            </span><span class="k">return</span> <span class="nx">price</span><span class="p">;</span><span class="err">                                           </span>
+</span><span class='line'><span class="err">        </span><span class="p">};</span>
+</span><span class='line'><span class="err"> </span>
+</span><span class='line'><span class="err">    </span><span class="k">return</span> <span class="p">{</span>
+</span><span class='line'><span class="err">        </span><span class="nx">isVatApplicable</span><span class="o">:</span> <span class="nx">isVatApplicable</span><span class="p">,</span>
+</span><span class='line'><span class="err">        </span><span class="nx">getPrice</span><span class="o">:</span> <span class="nx">getPrice</span>
+</span><span class='line'><span class="err">    </span><span class="p">};</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+</div>
+
+
+<p>对我来说，最后一种模式是最清晰的。因为你预先定义了所有东西，然后显式地将一些成员声明成公有的，这就是意图所在。</p>
+
+<h3>私有成员：警告</h3>
+
+<p>对于上面描述的模式有一个地方需要注意。因为在JavaScript中所有的变量都是按引用传递的，你有可能把私有变量暴露成公有变量。在上面的例子中那不可能发生因为price是一个值。</p>
+
+<p>然而，让我们考虑以下例子：</p>
+
+<div>
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">MYAPPLICATION</span><span class="p">.</span><span class="nx">MODEL</span><span class="p">.</span><span class="nx">PRODUCTS</span><span class="p">.</span><span class="nx">product</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">){</span>
+</span><span class='line'><span class="err">    </span><span class="kd">var</span> <span class="nx">dimensions</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'><span class="err">        </span><span class="nx">width</span><span class="o">:</span> <span class="nx">width</span><span class="p">,</span>
+</span><span class='line'><span class="err">        </span><span class="nx">height</span><span class="o">:</span> <span class="nx">height</span>
+</span><span class='line'><span class="err">    </span><span class="p">};</span>
+</span><span class='line'><span class="err">    </span><span class="kd">var</span> <span class="nx">getDimensions</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span><span class="err">                                              </span>
+</span><span class='line'><span class="err">            </span><span class="k">return</span> <span class="nx">dimensions</span><span class="p">;</span><span class="err">                                           </span>
+</span><span class='line'><span class="err">        </span><span class="p">};</span>
+</span><span class='line'><span class="err">    </span><span class="k">return</span> <span class="p">{</span>
+</span><span class='line'><span class="err">        </span><span class="nx">getDimensions</span><span class="o">:</span> <span class="nx">getDimensions</span>
+</span><span class='line'><span class="err">    </span><span class="p">};</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+</div>
+
+
+<p>我们在这里用了相同的模式，所以有人可能会认为dimensions-variable是私有变量。下面的例子展示了我们的担忧：</p>
+
+<div>
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">model</span> <span class="o">=</span> <span class="nx">MYAPPLICATION</span><span class="p">.</span><span class="nx">MODEL</span><span class="p">.</span><span class="nx">PRODUCTS</span><span class="p">;</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">p</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">model</span><span class="p">.</span><span class="nx">product</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="mi">100</span><span class="p">);</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">dims</span> <span class="o">=</span> <span class="nx">p</span><span class="p">.</span><span class="nx">getDimensions</span><span class="p">();</span>
+</span><span class='line'><span class="nx">dims</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span>
+</span><span class='line'><span class="nx">dims</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span>
+</span><span class='line'><span class="c1">// alerts 1000 1000 =&gt; unexpected</span>
+</span><span class='line'><span class="nx">alert</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">getDimensions</span><span class="p">().</span><span class="nx">width</span> <span class="o">+</span> <span class="err">“</span> <span class="err">“</span> <span class="o">+</span> <span class="nx">p</span><span class="p">.</span><span class="nx">getDimensions</span><span class="p">().</span><span class="nx">height</span><span class="p">);</span><span class="err"> </span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+</div>
+
+
+<p>这个代码实际上会输出“1000 1000”。因为改变第一次我们调用p.getDimensions按引用返回的dimensions变量的值会影响到私有变量。</p>
+
+<p>那解决方案是什么呢？</p>
+
+<ol>
+<li>不要返回对象，只返回值。在前面的例子中我们要创建两个方法：getWidth和getHeight；</li>
+<li>创建一个对象的拷贝。你可以在getDimensions方法中创建。</li>
+</ol>
+
+
+<h3>整合</h3>
+
+<p>下面的例子整合了所有前述的技术：</p>
+
+<div>
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="c1">//创建根命名空间并且确定我们没有覆盖它</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">MYAPPLICATION</span> <span class="o">=</span> <span class="nx">MYAPPLICATION</span> <span class="o">||</span> <span class="p">{};</span>
+</span><span class='line'><span class="err"> </span>
+</span><span class='line'><span class="c1">//创建一个通用的命名空间方法</span>
+</span><span class='line'><span class="c1">//这样我们可以更容易地创建命名空间</span>
+</span><span class='line'><span class="nx">MYAPPLICATION</span><span class="p">.</span><span class="nx">createNS</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">namespace</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'><span class="err">    </span><span class="kd">var</span> <span class="nx">nsparts</span> <span class="o">=</span> <span class="nx">namespace</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="err">    </span><span class="kd">var</span> <span class="nx">parent</span> <span class="o">=</span> <span class="nx">MYAPPLICATION</span><span class="p">;</span>
+</span><span class='line'><span class="err"> </span>
+</span><span class='line'><span class="c1">//我们想包括或删除根命名空间</span>
+</span><span class='line'><span class="c1">//如果它已在命名空间中则删除它</span>
+</span><span class='line'><span class="err">    </span><span class="k">if</span> <span class="p">(</span><span class="nx">nsparts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">===</span> <span class="s2">&quot;MYAPPLICATION&quot;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'><span class="err">        </span><span class="nx">nsparts</span> <span class="o">=</span> <span class="nx">nsparts</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span><span class='line'><span class="err">    </span><span class="p">}</span>
+</span><span class='line'><span class="err"> </span>
+</span><span class='line'>    <span class="c1">// 遍历parts ，如果可能就创建一个嵌套的命名空间</span>
+</span><span class='line'><span class="err">    </span><span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">nsparts</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'><span class="err">        </span><span class="kd">var</span> <span class="nx">partname</span> <span class="o">=</span> <span class="nx">nsparts</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+</span><span class='line'><span class="err">        </span><span class="c1">// 检查当前的parent是否已经声明了这个namespace</span>
+</span><span class='line'> <span class="c1">// 如果没有就创建之</span>
+</span><span class='line'><span class="err">        </span><span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">parent</span><span class="p">[</span><span class="nx">partname</span><span class="p">]</span> <span class="o">===</span> <span class="s2">&quot;undefined&quot;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'><span class="err">            </span><span class="nx">parent</span><span class="p">[</span><span class="nx">partname</span><span class="p">]</span> <span class="o">=</span> <span class="p">{};</span>
+</span><span class='line'><span class="err">        </span><span class="p">}</span>
+</span><span class='line'><span class="err">        </span><span class="c1">// 获得一个在目前层级里最深的元素</span>
+</span><span class='line'><span class="err">        </span><span class="nx">parent</span> <span class="o">=</span> <span class="nx">parent</span><span class="p">[</span><span class="nx">partname</span><span class="p">];</span>
+</span><span class='line'><span class="err">    </span><span class="p">}</span>
+</span><span class='line'><span class="err">  </span><span class="c1">// 现在的paren 是由空的命名空间组成的，我们返回最外层的命名空间</span>
+</span><span class='line'><span class="err">    </span><span class="k">return</span> <span class="nx">parent</span><span class="p">;</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'><span class="err"> </span>
+</span><span class='line'><span class="c1">//为products创建命名空间</span>
+</span><span class='line'><span class="nx">MYAPPLICATION</span><span class="p">.</span><span class="nx">createNS</span><span class="p">(</span><span class="s2">&quot;MYAPPLICATION.MODEL.PRODUCTS&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="err"> </span>
+</span><span class='line'><span class="nx">MYAPPLICATION</span><span class="p">.</span><span class="nx">MODEL</span><span class="p">.</span><span class="nx">PRODUCTS</span><span class="p">.</span><span class="nx">product</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">){</span>
+</span><span class='line'>  <span class="c1">//私有变量</span>
+</span><span class='line'><span class="err">    </span><span class="kd">var</span> <span class="nx">dimensions</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'><span class="err">        </span><span class="nx">width</span><span class="o">:</span> <span class="nx">width</span><span class="p">,</span>
+</span><span class='line'><span class="err">        </span><span class="nx">height</span><span class="o">:</span> <span class="nx">height</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">//私有方法</span>
+</span><span class='line'>  <span class="c1">//创建getWidth和getHeight，避免以引用的方式访问dimensions</span>
+</span><span class='line'><span class="err">    </span><span class="kd">var</span> <span class="nx">getWidth</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'><span class="err">        </span><span class="k">return</span> <span class="nx">dimensions</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
+</span><span class='line'><span class="err">    </span><span class="p">};</span>
+</span><span class='line'><span class="err">    </span><span class="kd">var</span> <span class="nx">getHeight</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'><span class="err">        </span><span class="k">return</span> <span class="nx">dimensions</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
+</span><span class='line'><span class="err">    </span><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">//公有API</span>
+</span><span class='line'><span class="err">    </span><span class="k">return</span> <span class="p">{</span>
+</span><span class='line'><span class="err">        </span><span class="nx">getWidth</span><span class="o">:</span> <span class="nx">getWidth</span><span class="p">,</span>
+</span><span class='line'><span class="err">        </span><span class="nx">getHeight</span><span class="o">:</span> <span class="nx">getHeight</span>
+</span><span class='line'><span class="err">    </span><span class="p">};</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'><span class="err"> </span>
+</span><span class='line'><span class="c1">//创建逻辑命名空间</span>
+</span><span class='line'><span class="nx">MYAPPLICATION</span><span class="p">.</span><span class="nx">createNS</span><span class="p">(</span><span class="s2">&quot;MYAPPLICATION.LOGIC.BUSINESS&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="err"> </span>
+</span><span class='line'><span class="nx">MYAPPLICATION</span><span class="p">.</span><span class="nx">LOGIC</span><span class="p">.</span><span class="nx">BUSINESS</span><span class="p">.</span><span class="nx">createAndAlertProduct</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+</span><span class='line'><span class="err">    </span><span class="kd">var</span> <span class="nx">model</span> <span class="o">=</span> <span class="nx">MYAPPLICATION</span><span class="p">.</span><span class="nx">MODEL</span><span class="p">.</span><span class="nx">PRODUCTS</span><span class="p">;</span>
+</span><span class='line'><span class="err">    </span><span class="kd">var</span> <span class="nx">p</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">model</span><span class="p">.</span><span class="nx">product</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="mi">100</span><span class="p">);</span>
+</span><span class='line'><span class="err">    </span><span class="nx">alert</span><span class="p">(</span><span class="nx">p</span><span class="p">.</span><span class="nx">getWidth</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="nx">p</span><span class="p">.</span><span class="nx">getHeight</span><span class="p">());</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+</div>
+
+
+<p>你可以看出，这种模式实现了模块和结构优良的JavaScript。使用这些技术可以使你的代码易读易改。还有其他可行的技术，你可以创建以及修改这种模式。</p>
+]]></content>
+  </entry>
+  
+</feed>

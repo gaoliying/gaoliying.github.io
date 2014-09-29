@@ -37,15 +37,21 @@
         <lastmod>2014-06-03T23:43:10+08:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://gaoliying.github.io/blog/2014/09/29/javascript-zhong-de-ming-ming-kong-jian-he-mo-kuai/
+        </loc>
+        <lastmod>2014-09-29T21:05:53+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://gaoliying.github.io/robots.txt</loc>
         <lastmod>2014-05-12T14:36:18+08:00</lastmod>
     </url>
     <url>
         <loc>http://gaoliying.github.io/blog/archives/</loc>
-        <lastmod>2014-06-03T23:43:10+08:00</lastmod>
+        <lastmod>2014-09-29T21:05:53+08:00</lastmod>
     </url>
     <url>
         <loc>http://gaoliying.github.io/</loc>
-        <lastmod>2014-06-03T23:43:10+08:00</lastmod>
+        <lastmod>2014-09-29T21:05:53+08:00</lastmod>
     </url>
 </urlset>
