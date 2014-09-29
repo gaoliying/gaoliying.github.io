@@ -118,7 +118,7 @@
 </span><span class='line'><span class="p">{</span>
 </span><span class='line'>  <span class="k">public</span> <span class="k">class</span> <span class="nc">MyClass</span>
 </span><span class='line'>  <span class="p">{</span>
-</span><span class='line'><span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
 </span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
@@ -169,7 +169,7 @@
 </span><span class='line'><span class="kd">var</span> <span class="nx">product</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">price</span><span class="p">)</span> <span class="p">{</span>
 </span><span class='line'><span class="err">    </span><span class="k">this</span><span class="p">.</span><span class="nx">price</span> <span class="o">=</span> <span class="nx">price</span><span class="p">;</span>
 </span><span class='line'><span class="err">    </span><span class="k">this</span><span class="p">.</span><span class="nx">getPrice</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
-</span><span class='line'><span class="err">                       </span><span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">price</span><span class="p">;</span>
+</span><span class='line'>      <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">price</span><span class="p">;</span>
 </span><span class='line'><span class="err">        </span><span class="p">};</span>
 </span><span class='line'><span class="err">    </span><span class="p">};</span>
 </span><span class='line'><span class="err"> </span>
@@ -267,7 +267,7 @@
 </span><span class='line'><span class="err">    </span><span class="nx">MODEL</span><span class="o">:</span> <span class="p">{</span>
 </span><span class='line'><span class="err">        </span><span class="nx">product</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">price</span><span class="p">)</span> <span class="p">{</span>
 </span><span class='line'><span class="err">                     </span><span class="k">this</span><span class="p">.</span><span class="nx">price</span> <span class="o">=</span> <span class="nx">price</span><span class="p">;</span>
-</span><span class='line'><span class="err">                    </span><span class="k">this</span><span class="p">.</span><span class="nx">getPrice</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'><span class="err">                    </span> <span class="k">this</span><span class="p">.</span><span class="nx">getPrice</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
 </span><span class='line'><span class="err">                         </span><span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">price</span><span class="p">;</span>
 </span><span class='line'><span class="err">                     </span><span class="p">};</span>
 </span><span class='line'><span class="err">                 </span><span class="p">}</span>
@@ -345,7 +345,7 @@
 </span><span class='line'><span class="nx">ns</span><span class="p">.</span><span class="nx">product</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">price</span><span class="p">){</span>
 </span><span class='line'><span class="err">   </span><span class="k">this</span><span class="p">.</span><span class="nx">price</span> <span class="o">=</span> <span class="nx">price</span><span class="p">;</span>
 </span><span class='line'><span class="err">   </span><span class="k">this</span><span class="p">.</span><span class="nx">getPrice</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
-</span><span class='line'><span class="err">    </span><span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">price</span><span class="p">;</span>
+</span><span class='line'><span class="err">    </span>    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">price</span><span class="p">;</span>
 </span><span class='line'><span class="err">   </span><span class="p">}</span>
 </span><span class='line'><span class="p">};</span>
 </span></code></pre></td></tr></table></div></figure>

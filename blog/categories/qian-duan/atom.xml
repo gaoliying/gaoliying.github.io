@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 前端 | 高立营]]></title>
   <link href="http://gaoliying.github.io/blog/categories/qian-duan/atom.xml" rel="self"/>
   <link href="http://gaoliying.github.io/"/>
-  <updated>2014-09-29T21:09:30+08:00</updated>
+  <updated>2014-09-29T21:14:11+08:00</updated>
   <id>http://gaoliying.github.io/</id>
   <author>
     <name><![CDATA[高立营]]></name>
@@ -35,7 +35,7 @@
 </span><span class='line'><span class="p">{</span>
 </span><span class='line'>    <span class="k">public</span> <span class="k">class</span> <span class="nc">MyClass</span>
 </span><span class='line'>    <span class="p">{</span>
-</span><span class='line'><span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
 </span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 </div>
@@ -82,7 +82,7 @@
 </span><span class='line'><span class="kd">var</span> <span class="nx">product</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">price</span><span class="p">)</span> <span class="p">{</span>
 </span><span class='line'><span class="err">    </span><span class="k">this</span><span class="p">.</span><span class="nx">price</span> <span class="o">=</span> <span class="nx">price</span><span class="p">;</span>
 </span><span class='line'><span class="err">    </span><span class="k">this</span><span class="p">.</span><span class="nx">getPrice</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
-</span><span class='line'><span class="err">                       </span><span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">price</span><span class="p">;</span>
+</span><span class='line'>        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">price</span><span class="p">;</span>
 </span><span class='line'><span class="err">        </span><span class="p">};</span>
 </span><span class='line'><span class="err">    </span><span class="p">};</span>
 </span><span class='line'><span class="err"> </span>
@@ -174,7 +174,7 @@
 </span><span class='line'><span class="err">    </span><span class="nx">MODEL</span><span class="o">:</span> <span class="p">{</span>
 </span><span class='line'><span class="err">        </span><span class="nx">product</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">price</span><span class="p">)</span> <span class="p">{</span>
 </span><span class='line'><span class="err">                     </span><span class="k">this</span><span class="p">.</span><span class="nx">price</span> <span class="o">=</span> <span class="nx">price</span><span class="p">;</span>
-</span><span class='line'><span class="err">                    </span><span class="k">this</span><span class="p">.</span><span class="nx">getPrice</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+</span><span class='line'><span class="err">                    </span> <span class="k">this</span><span class="p">.</span><span class="nx">getPrice</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
 </span><span class='line'><span class="err">                         </span><span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">price</span><span class="p">;</span>
 </span><span class='line'><span class="err">                     </span><span class="p">};</span>
 </span><span class='line'><span class="err">                 </span><span class="p">}</span>
@@ -248,7 +248,7 @@
 </span><span class='line'><span class="nx">ns</span><span class="p">.</span><span class="nx">product</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">price</span><span class="p">){</span>
 </span><span class='line'><span class="err">   </span><span class="k">this</span><span class="p">.</span><span class="nx">price</span> <span class="o">=</span> <span class="nx">price</span><span class="p">;</span>
 </span><span class='line'><span class="err">   </span><span class="k">this</span><span class="p">.</span><span class="nx">getPrice</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
-</span><span class='line'><span class="err">    </span><span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">price</span><span class="p">;</span>
+</span><span class='line'><span class="err">    </span>    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">price</span><span class="p">;</span>
 </span><span class='line'><span class="err">   </span><span class="p">}</span>
 </span><span class='line'><span class="p">};</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
