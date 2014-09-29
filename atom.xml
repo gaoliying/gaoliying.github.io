@@ -4,7 +4,7 @@
   <title><![CDATA[高立营]]></title>
   <link href="http://gaoliying.github.io/atom.xml" rel="self"/>
   <link href="http://gaoliying.github.io/"/>
-  <updated>2014-09-29T21:14:11+08:00</updated>
+  <updated>2014-09-29T21:15:56+08:00</updated>
   <id>http://gaoliying.github.io/</id>
   <author>
     <name><![CDATA[高立营]]></name>
@@ -736,6 +736,8 @@
 
 
 <p>你可以看出，这种模式实现了模块和结构优良的JavaScript。使用这些技术可以使你的代码易读易改。还有其他可行的技术，你可以创建以及修改这种模式。</p>
+
+<p>参考链接：<a href="http://www.kenneth-truyers.net/2013/04/27/javascript-namespaces-and-modules/">http://www.kenneth-truyers.net/2013/04/27/javascript-namespaces-and-modules/</a></p>
 ]]></content>
   </entry>
   
